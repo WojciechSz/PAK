@@ -68,6 +68,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormR1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormR1.Designer.cs">
+      <DependentUpon>FormR1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormR2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormR2.Designer.cs">
+      <DependentUpon>FormR2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -96,9 +108,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Filtr2.bmp" />
+    <Content Include="C.bmp" />
+    <Content Include="FiltrRLC1.bmp" />
     <Content Include="IkonaAplikacji.ico" />
     <Content Include="IkonaAplikacjiPasek.ico" />
+    <Content Include="L.bmp" />
+    <Content Include="R1.bmp" />
+    <Content Include="R2_.bmp" />
+    <Content Include="U_.bmp" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
