@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 
 namespace PAKZaliczenieProjekt
 {
@@ -39,6 +40,30 @@ namespace PAKZaliczenieProjekt
         private double valueC;
         private double valueU1;
         private double valueU2;
+        private double valueF1;
+        private double valueF2;
+        
+        private double F;
+        
+        // pulsacja
+        private double Omega;
+
+        // wartości zespolone
+        // źródło zasilania 
+        private Complex E;
+        // impedancje zespolone
+        private Complex Z1; 
+        private Complex Z2; 
+        private Complex Z3; 
+        // napięcia zespolone
+        private Complex U1; 
+        private Complex U2;
+        // prady zespolone
+        private Complex I1;
+        private Complex I2;
+        private Complex I3;
+        // wspolczynnik podobieństwa
+        private Complex k;
 
         public double ValueR1
         {
@@ -155,6 +180,44 @@ namespace PAKZaliczenieProjekt
                     break;
             }
             label.Text = value.ToString() + unitType;
+        }
+
+        public void Calculations()
+        {
+            E = new Complex((valueU1 / Math.Sqrt(2)), 0);
+            Omega = 2 * Math.PI * F;
+            Z1 = new Complex(0, Omega * valueL);
+            Z2 = new Complex(valueR1, 0);
+            Z3 = new Complex(valueR2, -(1 / Omega * valueC));
+
+            I3 = new Complex(1, 0);
+            U2 = Complex.Multiply(I3, Z3);
+            I2 = Complex.Divide(U2, Z2);
+
+            I1 = Complex.Add(I2, I3);
+
+            U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+
+            k = Complex.Divide(E, U1);
+
+            I1 = Complex.Multiply(k, I1);
+            I2 = Complex.Multiply(k, I2);
+            I3 = Complex.Multiply(k, I3);
+
+            U2 = Complex.Multiply(I3, Z3);
+            U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+
+            label12.Text = E.ToString();
+            label13.Text = Omega.ToString();
+            label14.Text = Z1.ToString();
+            label15.Text = Z2.ToString();
+            label16.Text = Z3.ToString();
+            label17.Text = U1.ToString();
+            label18.Text = U2.ToString();
+            label19.Text = k.ToString();
+            label20.Text = I1.ToString();
+            label21.Text = I2.ToString();
+            label22.Text = I3.ToString();
         }
 
         public Form1()
@@ -756,6 +819,11 @@ namespace PAKZaliczenieProjekt
         }
 
         private void buttonPrintChart_Click(object sender, EventArgs e)
+        {
+            Calculations();
+        }
+
+        private void label13_Click(object sender, EventArgs e)
         {
 
         }
