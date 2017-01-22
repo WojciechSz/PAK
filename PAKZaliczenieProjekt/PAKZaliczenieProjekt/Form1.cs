@@ -754,6 +754,11 @@ namespace PAKZaliczenieProjekt
         {
             toolStripTextBox6.Text = this.ValueU2.ToString();
         }
+
+        private void buttonPrintChart_Click(object sender, EventArgs e)
+        {
+
+        }
  
     }
 }
