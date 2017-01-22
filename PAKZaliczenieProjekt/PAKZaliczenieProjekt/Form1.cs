@@ -184,6 +184,7 @@ namespace PAKZaliczenieProjekt
 
         public void Calculations()
         {
+            F = 100;
             E = new Complex((valueU1 / Math.Sqrt(2)), 0);
             Omega = 2 * Math.PI * F;
             Z1 = new Complex(0, Omega * valueL);
