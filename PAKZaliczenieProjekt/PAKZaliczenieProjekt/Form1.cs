@@ -15,24 +15,24 @@ namespace PAKZaliczenieProjekt
     {
         private const double default1ValueR1 = 10;
         private const double default1ValueR2 = 40;
-        private const double default1ValueL = 70;
-        private const double default1ValueC = 100;
+        private const double default1ValueL = 0.007;
+        private const double default1ValueC = 0.00001;
         private const double default1ValueU1 = 130;
-        private const double default1ValueU2 = 160;
 
         private const double default2ValueR1 = 20;
         private const double default2ValueR2 = 50;
-        private const double default2ValueL = 80;
-        private const double default2ValueC = 110;
+        private const double default2ValueL = 0.008;
+        private const double default2ValueC = 0.000011;
         private const double default2ValueU1 = 140;
-        private const double default2ValueU2 = 170;
 
         private const double default3ValueR1 = 30;
         private const double default3ValueR2 = 60;
-        private const double default3ValueL = 90;
-        private const double default3ValueC = 120;
+        private const double default3ValueL = 0.009;
+        private const double default3ValueC = 0.000012;
         private const double default3ValueU1 = 150;
-        private const double default3ValueU2 = 180;
+
+        private const double default1ValueF1 = 50;
+        private const double default1ValueF2 = 100;
 
         private double valueR1;
         private double valueR2;
@@ -136,12 +136,37 @@ namespace PAKZaliczenieProjekt
             }
         }
 
+        public double ValueF1
+        {
+            get
+            {
+                return this.valueF1;
+            }
+            set
+            {
+                valueF2 = value;
+            }
+        }
+
+        public double ValueF2
+        {
+            get
+            {
+                return this.valueF2;
+            }
+            set
+            {
+                valueF2 = value;
+            }
+        }
+
         enum unit
         {
             Ω,
-            μH,
-            μF,
-            V
+            H,
+            F,
+            V,
+            Hz
         }
 
         private void labelTextWithUnit(Label label)
@@ -159,11 +184,11 @@ namespace PAKZaliczenieProjekt
                     value = valueR2;
                     break;
                 case "labelLValue":
-                    unitType = unit.μH;
+                    unitType = unit.H;
                     value = valueL;
                     break;
                 case "labelCValue":
-                    unitType = unit.μF;
+                    unitType = unit.F;
                     value = valueC;
                     break;
                 case "labelU1Value":
@@ -173,6 +198,14 @@ namespace PAKZaliczenieProjekt
                 case "labelU2Value":
                     unitType = unit.V;
                     value = valueU2;
+                    break;
+                case "labelFMin":
+                    unitType = unit.Hz;
+                    value = valueF1;
+                    break;
+                case "labelFMax":
+                    unitType = unit.Hz;
+                    value = valueF2;
                     break;
                 default:
                     unitType = unit.Ω;
@@ -184,29 +217,31 @@ namespace PAKZaliczenieProjekt
 
         public void Calculations()
         {
-            F = 100;
-            E = new Complex((valueU1 / Math.Sqrt(2)), 0);
-            Omega = 2 * Math.PI * F;
-            Z1 = new Complex(0, Omega * valueL);
-            Z2 = new Complex(valueR1, 0);
-            Z3 = new Complex(valueR2, -(1 / Omega * valueC));
+            for (F = valueF1; F < valueF2; F++)
+            {
+                E = new Complex((valueU1 / Math.Sqrt(2)), 0);
+                Omega = 2 * Math.PI * F;
+                Z1 = new Complex(0, Omega * valueL);
+                Z2 = new Complex(valueR1, 0);
+                Z3 = new Complex(valueR2, -(1 / Omega * valueC));
 
-            I3 = new Complex(1, 0);
-            U2 = Complex.Multiply(I3, Z3);
-            I2 = Complex.Divide(U2, Z2);
+                I3 = new Complex(1, 0);
+                U2 = Complex.Multiply(I3, Z3);
+                I2 = Complex.Divide(U2, Z2);
 
-            I1 = Complex.Add(I2, I3);
+                I1 = Complex.Add(I2, I3);
 
-            U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+                U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
 
-            k = Complex.Divide(E, U1);
+                k = Complex.Divide(E, U1);
 
-            I1 = Complex.Multiply(k, I1);
-            I2 = Complex.Multiply(k, I2);
-            I3 = Complex.Multiply(k, I3);
+                I1 = Complex.Multiply(k, I1);
+                I2 = Complex.Multiply(k, I2);
+                I3 = Complex.Multiply(k, I3);
 
-            U2 = Complex.Multiply(I3, Z3);
-            U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+                U2 = Complex.Multiply(I3, Z3);
+                U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+            }
 
             label12.Text = E.ToString();
             label13.Text = Omega.ToString();
@@ -230,14 +265,16 @@ namespace PAKZaliczenieProjekt
             this.ValueL = default1ValueL;
             this.ValueC = default1ValueC;
             this.ValueU1 = default1ValueU1;
-            this.ValueU2 = default1ValueU2;
+            this.ValueF1 = default1ValueF1;
+            this.ValueF2 = default1ValueF2;
 
             labelTextWithUnit(labelR1Value);
             labelTextWithUnit(labelR2Value);
             labelTextWithUnit(labelLValue);
             labelTextWithUnit(labelCValue);
             labelTextWithUnit(labelU1Value);
-            labelTextWithUnit(labelU2Value);
+            labelTextWithUnit(labelFMin);
+            labelTextWithUnit(labelFMax);
 
             this.toolStripMenuItem2.Text = default1ValueR1 + "" + unit.Ω;
             this.toolStripMenuItem3.Text = default2ValueR1 + "" + unit.Ω;
@@ -247,21 +284,17 @@ namespace PAKZaliczenieProjekt
             this.toolStripMenuItem6.Text = default2ValueR2 + "" + unit.Ω;
             this.toolStripMenuItem7.Text = default3ValueR2 + "" + unit.Ω;
 
-            this.toolStripMenuItem11.Text = default1ValueL + "" + unit.μH;
-            this.toolStripMenuItem12.Text = default2ValueL + "" + unit.μH;
-            this.toolStripMenuItem13.Text = default3ValueL + "" + unit.μH;
+            this.toolStripMenuItem11.Text = default1ValueL + "" + unit.H;
+            this.toolStripMenuItem12.Text = default2ValueL + "" + unit.H;
+            this.toolStripMenuItem13.Text = default3ValueL + "" + unit.H;
 
-            this.toolStripMenuItem8.Text = default1ValueC + "" + unit.μF;
-            this.toolStripMenuItem9.Text = default2ValueC + "" + unit.μF;
-            this.toolStripMenuItem10.Text = default3ValueC + "" + unit.μF;
+            this.toolStripMenuItem8.Text = default1ValueC + "" + unit.F;
+            this.toolStripMenuItem9.Text = default2ValueC + "" + unit.F;
+            this.toolStripMenuItem10.Text = default3ValueC + "" + unit.F;
 
             this.toolStripMenuItem14.Text = default1ValueU1 + "" + unit.V;
             this.toolStripMenuItem15.Text = default2ValueU1 + "" + unit.V;
             this.toolStripMenuItem16.Text = default3ValueU1 + "" + unit.V;
-
-            this.toolStripMenuItem17.Text = default1ValueU2 + "" + unit.V;
-            this.toolStripMenuItem18.Text = default2ValueU2 + "" + unit.V;
-            this.toolStripMenuItem19.Text = default3ValueU2 + "" + unit.V;
 
             toolStripStatusLabel1.Text = "gotowy";
         }
@@ -288,12 +321,12 @@ namespace PAKZaliczenieProjekt
 
         private void panelL_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "cewka L - " + this.ValueL + unit.μH;
+            toolStripStatusLabel1.Text = "cewka L - " + this.ValueL + unit.H;
         }
 
         private void panelC_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "kondensator C - " + this.ValueC + unit.μF;
+            toolStripStatusLabel1.Text = "kondensator C - " + this.ValueC + unit.F;
         }
 
         private void panelU1_MouseMove(object sender, MouseEventArgs e)
@@ -431,22 +464,18 @@ namespace PAKZaliczenieProjekt
             if (wyświetlajNapięcieToolStripMenuItem.Checked == true)
             {
                 labelU1Value.Visible = true;
+                labelFMin.Visible = true;
+                labelFMax.Visible = true;
+                labelMin.Visible = true;
+                labelMax.Visible = true;
             }
             else
             {
                 labelU1Value.Visible = false;
-            }
-        }
-
-        private void wyświetlajNapięcieToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (wyświetlajNapięcieToolStripMenuItem1.Checked == true)
-            {
-                labelU2Value.Visible = true;
-            }
-            else
-            {
-                labelU2Value.Visible = false;
+                labelFMin.Visible = false;
+                labelFMax.Visible = false;
+                labelMin.Visible = false;
+                labelMax.Visible = false;
             }
         }
 
@@ -487,7 +516,6 @@ namespace PAKZaliczenieProjekt
                 wyświetlajIndukcyjnośćToolStripMenuItem.Checked = true;
                 wyświetlajPojemnośćToolStripMenuItem.Checked = true;
                 wyświetlajNapięcieToolStripMenuItem.Checked = true;
-                wyświetlajNapięcieToolStripMenuItem1.Checked = true;
             }
             else
             {
@@ -496,14 +524,12 @@ namespace PAKZaliczenieProjekt
                 wyświetlajIndukcyjnośćToolStripMenuItem.Checked = false;
                 wyświetlajPojemnośćToolStripMenuItem.Checked = false;
                 wyświetlajNapięcieToolStripMenuItem.Checked = false;
-                wyświetlajNapięcieToolStripMenuItem1.Checked = false;
             }
             wyświetlajRezystancjeToolStripMenuItem_Click(sender, e);
             wyświetlajRezystancjeToolStripMenuItem1_Click(sender, e);
             wyświetlajIndukcyjnośćToolStripMenuItem_Click(sender, e);
             wyświetlajPojemnośćToolStripMenuItem_Click(sender, e);
             wyświetlajNapięcieToolStripMenuItem_Click(sender, e);
-            wyświetlajNapięcieToolStripMenuItem1_Click(sender, e);
         }
 
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
@@ -536,7 +562,7 @@ namespace PAKZaliczenieProjekt
         {
             if (!double.TryParse(toolStripTextBox3.Text, out this.valueL))
             {
-                MessageBox.Show("Błędna wartość rezystancji", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Błędna wartość indukcyjności", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -549,7 +575,7 @@ namespace PAKZaliczenieProjekt
         {
             if (!double.TryParse(toolStripTextBox4.Text, out this.valueC))
             {
-                MessageBox.Show("Błędna wartość rezystancji", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Błędna wartość pojemności", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -562,25 +588,12 @@ namespace PAKZaliczenieProjekt
         {
             if (!double.TryParse(toolStripTextBox5.Text, out this.valueU1))
             {
-                MessageBox.Show("Błędna wartość rezystancji", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Błędna wartość napięcia", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
                 labelTextWithUnit(labelU1Value);
-            }
-        }
-
-        private void toolStripTextBox6_TextChanged(object sender, EventArgs e)
-        {
-            if (!double.TryParse(toolStripTextBox6.Text, out this.valueU2))
-            {
-                MessageBox.Show("Błędna wartość rezystancji", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                labelTextWithUnit(labelU2Value);
             }
         }
 
@@ -765,25 +778,6 @@ namespace PAKZaliczenieProjekt
             labelTextWithUnit(labelU1Value);
         }
 
-        private void toolStripMenuItem17_Click(object sender, EventArgs e)
-        {
-            this.valueU2 = default1ValueU2;
-            labelTextWithUnit(labelU2Value);
-        }
-
-        private void toolStripMenuItem18_Click(object sender, EventArgs e)
-        {
-            this.valueU2 = default2ValueU2;
-            labelTextWithUnit(labelU2Value);
-        }
-
-        private void toolStripMenuItem19_Click(object sender, EventArgs e)
-        {
-            this.valueU2 = default3ValueU2;
-            labelTextWithUnit(labelU2Value);
-
-        }
-
         private void własnaToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
             toolStripTextBox1.Text = this.ValueR1.ToString();
@@ -814,9 +808,16 @@ namespace PAKZaliczenieProjekt
 
         }
 
-        private void toolStripTextBox6_MouseEnter(object sender, EventArgs e)
+        private void toolStripTextBox7_MouseEnter(object sender, EventArgs e)
         {
-            toolStripTextBox6.Text = this.ValueU2.ToString();
+            toolStripTextBox5.Text = this.ValueF1.ToString();
+
+        }
+
+        private void toolStripTextBox8_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripTextBox5.Text = this.ValueF2.ToString();
+
         }
 
         private void buttonPrintChart_Click(object sender, EventArgs e)
@@ -827,6 +828,32 @@ namespace PAKZaliczenieProjekt
         private void label13_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripTextBox7_TextChanged(object sender, EventArgs e)
+        {
+            if (!double.TryParse(toolStripTextBox7.Text, out this.valueF1))
+            {
+                MessageBox.Show("Błędna wartość częstotliwości", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                labelTextWithUnit(labelFMin);
+            }
+        }
+
+        private void toolStripTextBox8_TextChanged(object sender, EventArgs e)
+        {
+            if (!double.TryParse(toolStripTextBox8.Text, out this.valueF2))
+            {
+                MessageBox.Show("Błędna wartość częstotliwości", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                labelTextWithUnit(labelFMax);
+            }
         }
  
     }

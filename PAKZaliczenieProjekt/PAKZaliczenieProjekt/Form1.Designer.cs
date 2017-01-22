@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -58,7 +58,10 @@
             this.wyświetlPomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelU2Value = new System.Windows.Forms.Label();
+            this.labelMax = new System.Windows.Forms.Label();
+            this.labelMin = new System.Windows.Forms.Label();
+            this.labelFMax = new System.Windows.Forms.Label();
+            this.labelFMin = new System.Windows.Forms.Label();
             this.labelCValue = new System.Windows.Forms.Label();
             this.labelU1Value = new System.Windows.Forms.Label();
             this.labelLValue = new System.Windows.Forms.Label();
@@ -71,15 +74,7 @@
             this.labelR1 = new System.Windows.Forms.Label();
             this.panelU2 = new System.Windows.Forms.Panel();
             this.contextMenuStripU2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.napięcieU2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
-            this.inneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox6 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.wyświetlajOznaczenieToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.wyświetlajNapięcieToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelL = new System.Windows.Forms.Panel();
             this.contextMenuStripL = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ustawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +94,11 @@
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.inneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox5 = new System.Windows.Forms.ToolStripTextBox();
+            this.zakresCzęstotliwościToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox7 = new System.Windows.Forms.ToolStripTextBox();
+            this.maxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox8 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.wyświetlajOznaczenieToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.wyświetlajNapięcieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,11 +140,8 @@
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonPrintChart = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -156,6 +153,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -167,6 +165,9 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -179,10 +180,10 @@
             this.contextMenuStripR1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -373,7 +374,10 @@
             // panel1
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.Controls.Add(this.labelU2Value);
+            this.panel1.Controls.Add(this.labelMax);
+            this.panel1.Controls.Add(this.labelMin);
+            this.panel1.Controls.Add(this.labelFMax);
+            this.panel1.Controls.Add(this.labelFMin);
             this.panel1.Controls.Add(this.labelCValue);
             this.panel1.Controls.Add(this.labelU1Value);
             this.panel1.Controls.Add(this.labelLValue);
@@ -398,16 +402,45 @@
             this.panel1.TabIndex = 1;
             this.panel1.MouseEnter += new System.EventHandler(this.panel1_MouseEnter);
             // 
-            // labelU2Value
+            // labelMax
             // 
-            this.labelU2Value.AutoSize = true;
-            this.labelU2Value.BackColor = System.Drawing.SystemColors.Window;
-            this.labelU2Value.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelU2Value.Location = new System.Drawing.Point(396, 142);
-            this.labelU2Value.Name = "labelU2Value";
-            this.labelU2Value.Size = new System.Drawing.Size(43, 13);
-            this.labelU2Value.TabIndex = 16;
-            this.labelU2Value.Text = "#U2Val";
+            this.labelMax.AutoSize = true;
+            this.labelMax.BackColor = System.Drawing.SystemColors.Window;
+            this.labelMax.Location = new System.Drawing.Point(38, 155);
+            this.labelMax.Name = "labelMax";
+            this.labelMax.Size = new System.Drawing.Size(29, 13);
+            this.labelMax.TabIndex = 20;
+            this.labelMax.Text = "max.";
+            // 
+            // labelMin
+            // 
+            this.labelMin.AutoSize = true;
+            this.labelMin.BackColor = System.Drawing.SystemColors.Window;
+            this.labelMin.Location = new System.Drawing.Point(38, 142);
+            this.labelMin.Name = "labelMin";
+            this.labelMin.Size = new System.Drawing.Size(26, 13);
+            this.labelMin.TabIndex = 19;
+            this.labelMin.Text = "min.";
+            // 
+            // labelFMax
+            // 
+            this.labelFMax.AutoSize = true;
+            this.labelFMax.BackColor = System.Drawing.SystemColors.Window;
+            this.labelFMax.Location = new System.Drawing.Point(66, 155);
+            this.labelFMax.Name = "labelFMax";
+            this.labelFMax.Size = new System.Drawing.Size(40, 13);
+            this.labelFMax.TabIndex = 18;
+            this.labelFMax.Text = "#MaxF";
+            // 
+            // labelFMin
+            // 
+            this.labelFMin.AutoSize = true;
+            this.labelFMin.BackColor = System.Drawing.SystemColors.Window;
+            this.labelFMin.Location = new System.Drawing.Point(66, 142);
+            this.labelFMin.Name = "labelFMin";
+            this.labelFMin.Size = new System.Drawing.Size(37, 13);
+            this.labelFMin.TabIndex = 17;
+            this.labelFMin.Text = "#MinF";
             // 
             // labelCValue
             // 
@@ -426,7 +459,7 @@
             this.labelU1Value.AutoSize = true;
             this.labelU1Value.BackColor = System.Drawing.SystemColors.Window;
             this.labelU1Value.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelU1Value.Location = new System.Drawing.Point(36, 142);
+            this.labelU1Value.Location = new System.Drawing.Point(36, 129);
             this.labelU1Value.Name = "labelU1Value";
             this.labelU1Value.Size = new System.Drawing.Size(43, 13);
             this.labelU1Value.TabIndex = 14;
@@ -459,7 +492,7 @@
             this.labelU2.AutoSize = true;
             this.labelU2.BackColor = System.Drawing.SystemColors.Window;
             this.labelU2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelU2.Location = new System.Drawing.Point(396, 125);
+            this.labelU2.Location = new System.Drawing.Point(402, 129);
             this.labelU2.Name = "labelU2";
             this.labelU2.Size = new System.Drawing.Size(21, 13);
             this.labelU2.TabIndex = 11;
@@ -537,62 +570,9 @@
             // contextMenuStripU2
             // 
             this.contextMenuStripU2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.napięcieU2ToolStripMenuItem,
-            this.toolStripSeparator8,
-            this.wyświetlajOznaczenieToolStripMenuItem5,
-            this.wyświetlajNapięcieToolStripMenuItem1});
+            this.wyświetlajOznaczenieToolStripMenuItem5});
             this.contextMenuStripU2.Name = "contextMenuStripU2";
-            this.contextMenuStripU2.Size = new System.Drawing.Size(192, 76);
-            // 
-            // napięcieU2ToolStripMenuItem
-            // 
-            this.napięcieU2ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem17,
-            this.toolStripMenuItem18,
-            this.toolStripMenuItem19,
-            this.inneToolStripMenuItem1});
-            this.napięcieU2ToolStripMenuItem.Name = "napięcieU2ToolStripMenuItem";
-            this.napięcieU2ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.napięcieU2ToolStripMenuItem.Text = "Napięcie U2";
-            // 
-            // toolStripMenuItem17
-            // 
-            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
-            this.toolStripMenuItem17.Size = new System.Drawing.Size(97, 22);
-            this.toolStripMenuItem17.Click += new System.EventHandler(this.toolStripMenuItem17_Click);
-            // 
-            // toolStripMenuItem18
-            // 
-            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
-            this.toolStripMenuItem18.Size = new System.Drawing.Size(97, 22);
-            this.toolStripMenuItem18.Click += new System.EventHandler(this.toolStripMenuItem18_Click);
-            // 
-            // toolStripMenuItem19
-            // 
-            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
-            this.toolStripMenuItem19.Size = new System.Drawing.Size(97, 22);
-            this.toolStripMenuItem19.Click += new System.EventHandler(this.toolStripMenuItem19_Click);
-            // 
-            // inneToolStripMenuItem1
-            // 
-            this.inneToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripTextBox6});
-            this.inneToolStripMenuItem1.Name = "inneToolStripMenuItem1";
-            this.inneToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
-            this.inneToolStripMenuItem1.Text = "Inne";
-            // 
-            // toolStripTextBox6
-            // 
-            this.toolStripTextBox6.Name = "toolStripTextBox6";
-            this.toolStripTextBox6.Size = new System.Drawing.Size(100, 23);
-            this.toolStripTextBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.toolStripTextBox6_KeyPress);
-            this.toolStripTextBox6.MouseEnter += new System.EventHandler(this.toolStripTextBox6_MouseEnter);
-            this.toolStripTextBox6.TextChanged += new System.EventHandler(this.toolStripTextBox6_TextChanged);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(188, 6);
+            this.contextMenuStripU2.Size = new System.Drawing.Size(192, 26);
             // 
             // wyświetlajOznaczenieToolStripMenuItem5
             // 
@@ -603,16 +583,6 @@
             this.wyświetlajOznaczenieToolStripMenuItem5.Size = new System.Drawing.Size(191, 22);
             this.wyświetlajOznaczenieToolStripMenuItem5.Text = "Wyświetlaj oznaczenie";
             this.wyświetlajOznaczenieToolStripMenuItem5.Click += new System.EventHandler(this.wyświetlajOznaczenieToolStripMenuItem5_Click);
-            // 
-            // wyświetlajNapięcieToolStripMenuItem1
-            // 
-            this.wyświetlajNapięcieToolStripMenuItem1.Checked = true;
-            this.wyświetlajNapięcieToolStripMenuItem1.CheckOnClick = true;
-            this.wyświetlajNapięcieToolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.wyświetlajNapięcieToolStripMenuItem1.Name = "wyświetlajNapięcieToolStripMenuItem1";
-            this.wyświetlajNapięcieToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
-            this.wyświetlajNapięcieToolStripMenuItem1.Text = "Wyświetlaj napięcie";
-            this.wyświetlajNapięcieToolStripMenuItem1.Click += new System.EventHandler(this.wyświetlajNapięcieToolStripMenuItem1_Click);
             // 
             // panelL
             // 
@@ -724,11 +694,12 @@
             // 
             this.contextMenuStripU1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.napięcieU1ToolStripMenuItem,
+            this.zakresCzęstotliwościToolStripMenuItem,
             this.toolStripSeparator7,
             this.wyświetlajOznaczenieToolStripMenuItem4,
             this.wyświetlajNapięcieToolStripMenuItem});
             this.contextMenuStripU1.Name = "contextMenuStripU1";
-            this.contextMenuStripU1.Size = new System.Drawing.Size(192, 76);
+            this.contextMenuStripU1.Size = new System.Drawing.Size(257, 98);
             // 
             // napięcieU1ToolStripMenuItem
             // 
@@ -738,7 +709,7 @@
             this.toolStripMenuItem16,
             this.inneToolStripMenuItem});
             this.napięcieU1ToolStripMenuItem.Name = "napięcieU1ToolStripMenuItem";
-            this.napięcieU1ToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.napięcieU1ToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.napięcieU1ToolStripMenuItem.Text = "Napięcie U1";
             // 
             // toolStripMenuItem14
@@ -775,10 +746,47 @@
             this.toolStripTextBox5.MouseEnter += new System.EventHandler(this.toolStripTextBox5_MouseEnter);
             this.toolStripTextBox5.TextChanged += new System.EventHandler(this.toolStripTextBox5_TextChanged);
             // 
+            // zakresCzęstotliwościToolStripMenuItem
+            // 
+            this.zakresCzęstotliwościToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.minToolStripMenuItem,
+            this.maxToolStripMenuItem});
+            this.zakresCzęstotliwościToolStripMenuItem.Name = "zakresCzęstotliwościToolStripMenuItem";
+            this.zakresCzęstotliwościToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.zakresCzęstotliwościToolStripMenuItem.Text = "Zakres częstotliwości";
+            // 
+            // minToolStripMenuItem
+            // 
+            this.minToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox7});
+            this.minToolStripMenuItem.Name = "minToolStripMenuItem";
+            this.minToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.minToolStripMenuItem.Text = "Min";
+            // 
+            // toolStripTextBox7
+            // 
+            this.toolStripTextBox7.Name = "toolStripTextBox7";
+            this.toolStripTextBox7.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox7.TextChanged += new System.EventHandler(this.toolStripTextBox7_TextChanged);
+            // 
+            // maxToolStripMenuItem
+            // 
+            this.maxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox8});
+            this.maxToolStripMenuItem.Name = "maxToolStripMenuItem";
+            this.maxToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.maxToolStripMenuItem.Text = "Max";
+            // 
+            // toolStripTextBox8
+            // 
+            this.toolStripTextBox8.Name = "toolStripTextBox8";
+            this.toolStripTextBox8.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox8.TextChanged += new System.EventHandler(this.toolStripTextBox8_TextChanged);
+            // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(188, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(253, 6);
             // 
             // wyświetlajOznaczenieToolStripMenuItem4
             // 
@@ -786,7 +794,7 @@
             this.wyświetlajOznaczenieToolStripMenuItem4.CheckOnClick = true;
             this.wyświetlajOznaczenieToolStripMenuItem4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.wyświetlajOznaczenieToolStripMenuItem4.Name = "wyświetlajOznaczenieToolStripMenuItem4";
-            this.wyświetlajOznaczenieToolStripMenuItem4.Size = new System.Drawing.Size(191, 22);
+            this.wyświetlajOznaczenieToolStripMenuItem4.Size = new System.Drawing.Size(256, 22);
             this.wyświetlajOznaczenieToolStripMenuItem4.Text = "Wyświetlaj oznaczenie";
             this.wyświetlajOznaczenieToolStripMenuItem4.Click += new System.EventHandler(this.wyświetlajOznaczenieToolStripMenuItem4_Click);
             // 
@@ -796,8 +804,8 @@
             this.wyświetlajNapięcieToolStripMenuItem.CheckOnClick = true;
             this.wyświetlajNapięcieToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.wyświetlajNapięcieToolStripMenuItem.Name = "wyświetlajNapięcieToolStripMenuItem";
-            this.wyświetlajNapięcieToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.wyświetlajNapięcieToolStripMenuItem.Text = "Wyświetlaj napięcie";
+            this.wyświetlajNapięcieToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.wyświetlajNapięcieToolStripMenuItem.Text = "Wyświetlaj napięcie i częstotliwość";
             this.wyświetlajNapięcieToolStripMenuItem.Click += new System.EventHandler(this.wyświetlajNapięcieToolStripMenuItem_Click);
             // 
             // panelR2
@@ -1087,7 +1095,7 @@
             this.labelU1.AutoSize = true;
             this.labelU1.BackColor = System.Drawing.SystemColors.Window;
             this.labelU1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.labelU1.Location = new System.Drawing.Point(36, 125);
+            this.labelU1.Location = new System.Drawing.Point(36, 116);
             this.labelU1.Name = "labelU1";
             this.labelU1.Size = new System.Drawing.Size(21, 13);
             this.labelU1.TabIndex = 10;
@@ -1095,34 +1103,34 @@
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(3, 282);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(495, 307);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
             // chart2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
             this.chart2.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.chart2.Legends.Add(legend4);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(3, 3);
             this.chart2.Name = "chart2";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart2.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
             this.chart2.Size = new System.Drawing.Size(495, 273);
             this.chart2.TabIndex = 3;
             this.chart2.Text = "chart2";
@@ -1146,11 +1154,6 @@
             this.buttonPrintChart.Text = "Generuj wykres";
             this.buttonPrintChart.UseVisualStyleBackColor = true;
             this.buttonPrintChart.Click += new System.EventHandler(this.buttonPrintChart_Click);
-            // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
             // flowLayoutPanel1
             // 
@@ -1177,27 +1180,8 @@
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 304);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(72, 304);
             this.flowLayoutPanel2.TabIndex = 0;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.label12);
-            this.flowLayoutPanel3.Controls.Add(this.label13);
-            this.flowLayoutPanel3.Controls.Add(this.label14);
-            this.flowLayoutPanel3.Controls.Add(this.label15);
-            this.flowLayoutPanel3.Controls.Add(this.label16);
-            this.flowLayoutPanel3.Controls.Add(this.label17);
-            this.flowLayoutPanel3.Controls.Add(this.label18);
-            this.flowLayoutPanel3.Controls.Add(this.label19);
-            this.flowLayoutPanel3.Controls.Add(this.label20);
-            this.flowLayoutPanel3.Controls.Add(this.label21);
-            this.flowLayoutPanel3.Controls.Add(this.label22);
-            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(209, 3);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(244, 304);
-            this.flowLayoutPanel3.TabIndex = 1;
             // 
             // label1
             // 
@@ -1308,6 +1292,26 @@
             this.label11.Size = new System.Drawing.Size(15, 13);
             this.label11.TabIndex = 1;
             this.label11.Text = "i3";
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.label12);
+            this.flowLayoutPanel3.Controls.Add(this.label13);
+            this.flowLayoutPanel3.Controls.Add(this.label14);
+            this.flowLayoutPanel3.Controls.Add(this.label15);
+            this.flowLayoutPanel3.Controls.Add(this.label16);
+            this.flowLayoutPanel3.Controls.Add(this.label17);
+            this.flowLayoutPanel3.Controls.Add(this.label18);
+            this.flowLayoutPanel3.Controls.Add(this.label19);
+            this.flowLayoutPanel3.Controls.Add(this.label20);
+            this.flowLayoutPanel3.Controls.Add(this.label21);
+            this.flowLayoutPanel3.Controls.Add(this.label22);
+            this.flowLayoutPanel3.Controls.Add(this.label23);
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(81, 3);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(372, 304);
+            this.flowLayoutPanel3.TabIndex = 1;
             // 
             // label12
             // 
@@ -1420,6 +1424,21 @@
             this.label22.TabIndex = 12;
             this.label22.Text = "label22";
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(5, 258);
+            this.label23.Margin = new System.Windows.Forms.Padding(5);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(41, 13);
+            this.label23.TabIndex = 13;
+            this.label23.Text = "label23";
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1448,12 +1467,12 @@
             this.contextMenuStripR1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1519,11 +1538,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem inneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem napięcieU2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem18;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem19;
-        private System.Windows.Forms.ToolStripMenuItem inneToolStripMenuItem1;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.Label labelR1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
@@ -1535,14 +1549,11 @@
         private System.Windows.Forms.Label labelC;
         private System.Windows.Forms.Label labelL;
         private System.Windows.Forms.Label labelR2;
-        private System.Windows.Forms.Label labelU2Value;
         private System.Windows.Forms.Label labelCValue;
         private System.Windows.Forms.Label labelU1Value;
         private System.Windows.Forms.Label labelLValue;
         private System.Windows.Forms.Label labelR2Value;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem wyświetlajOznaczenieToolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem wyświetlajNapięcieToolStripMenuItem1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem wyświetlajOznaczenieToolStripMenuItem2;
@@ -1560,7 +1571,6 @@
         private System.Windows.Forms.ToolStripMenuItem wyświetlajPojemnośćToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox5;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox6;
         private System.Windows.Forms.ToolStripMenuItem wyświetlajOznaczeniaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wyświetlajWartościParametrówToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
@@ -1592,6 +1602,16 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ToolStripMenuItem zakresCzęstotliwościToolStripMenuItem;
+        private System.Windows.Forms.Label labelFMax;
+        private System.Windows.Forms.Label labelFMin;
+        private System.Windows.Forms.ToolStripMenuItem minToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem maxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox7;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox8;
+        private System.Windows.Forms.Label labelMax;
+        private System.Windows.Forms.Label labelMin;
     }
 }
 
