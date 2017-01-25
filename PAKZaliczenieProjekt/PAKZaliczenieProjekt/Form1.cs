@@ -38,7 +38,7 @@ namespace PAKZaliczenieProjekt
         private const double default3ValueU1 = 150;
 
         private const double default1ValueF1 = 50;
-        private const double default1ValueF2 = 100;
+        private const double default1ValueF2 = 1000;
 
         private double valueR1;
         private double valueR2;
@@ -70,6 +70,8 @@ namespace PAKZaliczenieProjekt
         private Complex[] I3;
         // wspolczynnik podobieństwa
         private Complex[] k;
+
+        private Complex[] U2ByU1;
 
         public double ValueR1
         {
@@ -244,6 +246,7 @@ namespace PAKZaliczenieProjekt
             U1 = new Complex[size];
             U2 = new Complex[size];
             k = new Complex[size];
+            U2ByU1 = new Complex[size];
 
             //for (F = valueF1; F <= valueF2; F += 0.00001)
             for (counter = 0; counter < step * (valueF2 - valueF1); counter++)
@@ -283,6 +286,8 @@ namespace PAKZaliczenieProjekt
 
                 U2[counter] = Complex.Multiply(I3[counter], Z3[counter]);
                 U1[counter] = Complex.Add(Complex.Multiply(Z1[counter], I1[counter]), U2[counter]);
+
+                U2ByU1[counter] = Complex.Divide(U2[counter], U1[counter]);
 
                 percent2 = (int)(100 * (F[counter] - valueF1) / (valueF2 - valueF1));
                 if (percent2 > percent1)
@@ -991,101 +996,149 @@ namespace PAKZaliczenieProjekt
                     toolStripStatusLabel3.Text = "100%";
                     toolStripProgressBar1.Value = 100;
 
-                    // TU BEDZIE RYSOWANIE WYKRESOW
-
-                    //deklaracja tablicy klasy kolekcji
-                    DataTable dTable; //Tablica dla kontrolki Chart
-                    DataView dView; //Tablica widoku dla kontrolki Chart - ten obiekt przygotowuje dane do wykresu - sortuje/filtruje itp
-                    //inicjalizacja tablicy dTable - nie ma wymiarow
-                    dTable = new DataTable();
-                    DataColumn column; //deklaracja obiektu kolumny
-                    DataRow row; //deklaracja obiektu wiersza
-                    column = new DataColumn(); //inicjalizacja kolumny
-                    //zdefiniowanie typu danych w kolumnie
-                    column.DataType = Type.GetType("System.Double");
-                    //zdefiniowanie nzwy kolumny
-                    column.ColumnName = "Czestotliwosc";
-                    //zdefiniowanie kolumny do tablicy
-                    dTable.Columns.Add(column);
-
-                    column = new DataColumn();
-                    column.DataType = Type.GetType("System.Double");
-                    column.ColumnName = "Prad";
-                    dTable.Columns.Add(column);
-
                     ///// TO jakoś zmienić
                     int size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
+                    // TU BEDZIE RYSOWANIE WYKRESOW
+                    DataTable chart1DataTable;
+                    DataView chart1DataView;
 
+                    chart1DataTable = new DataTable();
+                    DataColumn chart1Column; 
+                    DataRow chart1Row; 
+                    chart1Column = new DataColumn(); 
+                    chart1Column.DataType = Type.GetType("System.Double");
+                    chart1Column.ColumnName = "Czestotliwosc";
+                    chart1DataTable.Columns.Add(chart1Column);
+
+                    chart1Column = new DataColumn();
+                    chart1Column.DataType = Type.GetType("System.Double");
+                    chart1Column.ColumnName = "Prad";
+                    chart1DataTable.Columns.Add(chart1Column);
 
                     for (int i = 0; i < size; i++)
                     {
-                        row = dTable.NewRow();
-                        row["Czestotliwosc"] = F[i];
-                        row["Prad"] = I1[i].Magnitude;
-                        dTable.Rows.Add(row);
+                        chart1Row = chart1DataTable.NewRow();
+                        chart1Row["Czestotliwosc"] = F[i];
+                        chart1Row["Prad"] = I1[i].Magnitude;
+                        chart1DataTable.Rows.Add(chart1Row);
                     }
-                    // inicjalizacja obiektu widoku z obiektem klasy kolekcji
-                    dView = new DataView(dTable);
-                    //usuniecie poprzednich serii na wykresie
+
+                    chart1DataView = new DataView(chart1DataTable);
+
                     chart1.Series.Clear();
                     chart1.Titles.Clear();
-                    //przeslanie danych do wykresu za pomoca obiektu klas widoku
-                    // 1 - obiekt klasy widoku, 2 - kolumna jako dane osi X
-                    chart1.DataBindTable(dView, "Czestotliwosc");
+
+                    chart1.DataBindTable(chart1DataView, "Czestotliwosc");
                     chart1.Series["Prad"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    chart1.Series["Prad"].Color = Color.Blue;
                     chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{#0.000}";
                     chart1.ChartAreas[0].BackColor = Color.Azure;
                     chart1.ChartAreas[0].AxisX.LineWidth = 1;
                     chart1.ChartAreas[0].AxisY.LineWidth = 1;
                     chart1.ChartAreas[0].AxisX.Title = "Czestotliwosc [Hz]";
                     chart1.ChartAreas[0].AxisY.Title = "Prąd I1 [A]";
-                    chart1.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 12F, FontStyle.Bold);
-                    chart1.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Italic);
+                    chart1.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
+                    chart1.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
                     chart1.Titles.Add("Prąd zasilający I1 w funkcji częstotliwości");
                     chart1.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, FontStyle.Bold);
-                    chart1.Titles[0].ForeColor = Color.Red;
+                    chart1.Titles[0].ForeColor = Color.Gray;
                     chart1.Legends[0].DockedToChartArea = chart1.ChartAreas[0].Name;
                     chart1.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
                     chart1.ChartAreas[0].AxisX.Minimum = this.valueF1;
                     chart1.ChartAreas[0].AxisX.Maximum = this.valueF2;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    DataTable chart2DataTable;
+                    DataView chart2DataView;
 
+                    chart2DataTable = new DataTable();
+                    DataColumn chart2Column; 
+                    DataRow chart2Row;
+                    chart2Column = new DataColumn(); 
+                    chart2Column.DataType = Type.GetType("System.Double");
+                    chart2Column.ColumnName = "Czestotliwosc";
+                    chart2DataTable.Columns.Add(chart2Column);
+
+                    chart2Column = new DataColumn();
+                    chart2Column.DataType = Type.GetType("System.Double");
+                    chart2Column.ColumnName = "Faza";
+                    chart2DataTable.Columns.Add(chart2Column);
 
                     for (int i = 0; i < size; i++)
                     {
-                        row = dTable.NewRow();
-                        row["Czestotliwosc"] = F[i];
-                        double faza1 = U1[i].Phase;
-                        double faza2 = U2[i].Phase;
-                        Complex dzieliny;
-                        dzieliny = U2[i].Magnitude/ U1[i].Magnitude;
-                        double tresc = dzieliny.Phase;
-                        row["Prad"] = (tresc);
-                        dTable.Rows.Add(row);
+                        chart2Row = chart2DataTable.NewRow();
+                        chart2Row["Czestotliwosc"] = F[i];
+                        chart2Row["Faza"] = U2ByU1[i].Phase;
+                        chart2DataTable.Rows.Add(chart2Row);
                     }
-                    // inicjalizacja obiektu widoku z obiektem klasy kolekcji
-                    dView = new DataView(dTable);
-                    //usuniecie poprzednich serii na wykresie
+                    chart2DataView = new DataView(chart2DataTable);
                     chart2.Series.Clear();
                     chart2.Titles.Clear();
-                    //przeslanie danych do wykresu za pomoca obiektu klas widoku
-                    // 1 - obiekt klasy widoku, 2 - kolumna jako dane osi X
-                    chart2.DataBindTable(dView, "Czestotliwosc");
-                    chart2.Series["Prad"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+
+                    chart2.DataBindTable(chart2DataView, "Czestotliwosc");
+                    chart2.Series["Faza"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    chart2.Series["Faza"].Color = Color.Red;
                     chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{#0.000}";
                     chart2.ChartAreas[0].BackColor = Color.Azure;
                     chart2.ChartAreas[0].AxisX.LineWidth = 1;
                     chart2.ChartAreas[0].AxisY.LineWidth = 1;
                     chart2.ChartAreas[0].AxisX.Title = "Czestotliwosc [Hz]";
-                    chart2.ChartAreas[0].AxisY.Title = "Trans. U2/U1";
-                    chart2.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 12F, FontStyle.Bold);
-                    chart2.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Italic);
-                    chart2.Titles.Add("Transmitancji filtru U2/U1 w funkcji częstotliwości f dla stanuustalonego ");
+                    chart2.ChartAreas[0].AxisY.Title = "Faza [φ]";
+                    chart2.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
+                    chart2.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
+                    chart2.Titles.Add("Widmo fazowe filtru U2/U1");
                     chart2.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, FontStyle.Bold);
-                    chart2.Titles[0].ForeColor = Color.Red;
+                    chart2.Titles[0].ForeColor = Color.Gray;
                     chart2.Legends[0].DockedToChartArea = chart1.ChartAreas[0].Name;
                     chart2.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
                     chart2.ChartAreas[0].AxisX.Minimum = this.valueF1;
                     chart2.ChartAreas[0].AxisX.Maximum = this.valueF2;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    DataTable chart3DataTable;
+                    DataView chart3DataView;
+
+                    chart3DataTable = new DataTable();
+                    DataColumn chart3Column;
+                    DataRow chart3Row;
+                    chart3Column = new DataColumn();
+                    chart3Column.DataType = Type.GetType("System.Double");
+                    chart3Column.ColumnName = "Czestotliwosc";
+                    chart3DataTable.Columns.Add(chart3Column);
+
+                    chart3Column = new DataColumn();
+                    chart3Column.DataType = Type.GetType("System.Double");
+                    chart3Column.ColumnName = "Amplituda";
+                    chart3DataTable.Columns.Add(chart3Column);
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        chart2Row = chart2DataTable.NewRow();
+                        chart2Row["Czestotliwosc"] = F[i];
+                        chart2Row["Amplituda"] = U2ByU1[i].Magnitude;
+                        chart2DataTable.Rows.Add(chart2Row);
+                    }
+                    chart3DataView = new DataView(chart2DataTable);
+                    chart3.Series.Clear();
+                    chart3.Titles.Clear();
+
+                    chart3.DataBindTable(chart3DataView, "Czestotliwosc");
+                    chart3.Series["Amplituda"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    chart3.Series["Amplituda"].Color = Color.Red;
+                    chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{#0.000}";
+                    chart3.ChartAreas[0].BackColor = Color.Azure;
+                    chart3.ChartAreas[0].AxisX.LineWidth = 1;
+                    chart3.ChartAreas[0].AxisY.LineWidth = 1;
+                    chart3.ChartAreas[0].AxisX.Title = "Czestotliwosc [Hz]";
+                    chart3.ChartAreas[0].AxisY.Title = "Amplituda []";
+                    chart3.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
+                    chart3.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
+                    chart3.Titles.Add("Widmo fazowe filtru U2/U1");
+                    chart3.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, FontStyle.Bold);
+                    chart3.Titles[0].ForeColor = Color.Gray;
+                    chart3.Legends[0].DockedToChartArea = chart1.ChartAreas[0].Name;
+                    chart3.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
+                    chart3.ChartAreas[0].AxisX.Minimum = this.valueF1;
+                    chart3.ChartAreas[0].AxisX.Maximum = this.valueF2;
 
                     //------------------------------------------------------------
 
