@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
@@ -48,14 +48,13 @@
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otwórzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ustawieniaStronyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ądWydrukuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drukujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.szybkieDrukowanieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edycjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cofnijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ponówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.widokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasekStanuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wyświetlajOznaczeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +62,7 @@
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wyświetlPomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelMax = new System.Windows.Forms.Label();
             this.labelMin = new System.Windows.Forms.Label();
@@ -144,19 +144,21 @@
             this.labelU1 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.buttonStop = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonPrintChart = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.chart3 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
             this.panel1.SuspendLayout();
             this.contextMenuStripU2.SuspendLayout();
             this.contextMenuStripL.SuspendLayout();
@@ -166,9 +168,9 @@
             this.contextMenuStripR1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -226,9 +228,9 @@
             this.plikToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.otwórzToolStripMenuItem,
             this.toolStripSeparator1,
-            this.ustawieniaStronyToolStripMenuItem,
             this.ądWydrukuToolStripMenuItem,
             this.drukujToolStripMenuItem,
+            this.szybkieDrukowanieToolStripMenuItem,
             this.toolStripSeparator2,
             this.zamknijToolStripMenuItem});
             this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
@@ -239,53 +241,53 @@
             // 
             this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
             this.otwórzToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.otwórzToolStripMenuItem.Text = "&Otwórz...";
+            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.otwórzToolStripMenuItem.Text = "&Otwórz obraz...";
+            this.otwórzToolStripMenuItem.Click += new System.EventHandler(this.otwórzToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
-            // 
-            // ustawieniaStronyToolStripMenuItem
-            // 
-            this.ustawieniaStronyToolStripMenuItem.Name = "ustawieniaStronyToolStripMenuItem";
-            this.ustawieniaStronyToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.ustawieniaStronyToolStripMenuItem.Text = "Ustawienia strony...";
-            this.ustawieniaStronyToolStripMenuItem.Click += new System.EventHandler(this.ustawieniaStronyToolStripMenuItem_Click);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(216, 6);
             // 
             // ądWydrukuToolStripMenuItem
             // 
             this.ądWydrukuToolStripMenuItem.Name = "ądWydrukuToolStripMenuItem";
-            this.ądWydrukuToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.ądWydrukuToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.ądWydrukuToolStripMenuItem.Text = "Podgląd wydruku...";
             this.ądWydrukuToolStripMenuItem.Click += new System.EventHandler(this.ądWydrukuToolStripMenuItem_Click);
             // 
             // drukujToolStripMenuItem
             // 
             this.drukujToolStripMenuItem.Name = "drukujToolStripMenuItem";
-            this.drukujToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.drukujToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.drukujToolStripMenuItem.Text = "&Drukuj...";
+            this.drukujToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.drukujToolStripMenuItem.Text = "Drukuj...";
             this.drukujToolStripMenuItem.Click += new System.EventHandler(this.drukujToolStripMenuItem_Click);
+            // 
+            // szybkieDrukowanieToolStripMenuItem
+            // 
+            this.szybkieDrukowanieToolStripMenuItem.Name = "szybkieDrukowanieToolStripMenuItem";
+            this.szybkieDrukowanieToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.szybkieDrukowanieToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.szybkieDrukowanieToolStripMenuItem.Text = "&Szybkie drukowanie";
+            this.szybkieDrukowanieToolStripMenuItem.Click += new System.EventHandler(this.szybkieDrukowanieToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(216, 6);
             // 
             // zamknijToolStripMenuItem
             // 
             this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
-            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.zamknijToolStripMenuItem.Text = "Zamknij";
             this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
             // 
             // edycjaToolStripMenuItem
             // 
             this.edycjaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cofnijToolStripMenuItem,
-            this.ponówToolStripMenuItem});
+            this.cofnijToolStripMenuItem});
             this.edycjaToolStripMenuItem.Name = "edycjaToolStripMenuItem";
             this.edycjaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.edycjaToolStripMenuItem.Text = "Edycja";
@@ -293,15 +295,11 @@
             // cofnijToolStripMenuItem
             // 
             this.cofnijToolStripMenuItem.Name = "cofnijToolStripMenuItem";
-            this.cofnijToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.cofnijToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.cofnijToolStripMenuItem.Text = "&Cofnij";
-            // 
-            // ponówToolStripMenuItem
-            // 
-            this.ponówToolStripMenuItem.Name = "ponówToolStripMenuItem";
-            this.ponówToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.ponówToolStripMenuItem.Text = "&Ponów";
+            this.cofnijToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.cofnijToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.cofnijToolStripMenuItem.Text = "&Ustawienia parametrów...";
+            this.cofnijToolStripMenuItem.Click += new System.EventHandler(this.cofnijToolStripMenuItem_Click);
             // 
             // widokToolStripMenuItem
             // 
@@ -355,8 +353,9 @@
             // 
             this.wyświetlPomocToolStripMenuItem.Name = "wyświetlPomocToolStripMenuItem";
             this.wyświetlPomocToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.wyświetlPomocToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.wyświetlPomocToolStripMenuItem.Text = "&Wyświetl pomoc...";
+            this.wyświetlPomocToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.wyświetlPomocToolStripMenuItem.Text = "&Wyświetl informacje";
+            this.wyświetlPomocToolStripMenuItem.Click += new System.EventHandler(this.wyświetlPomocToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -368,6 +367,7 @@
             this.tableLayoutPanel1.Controls.Add(this.chart1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.chart2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -378,6 +378,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(969, 619);
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.MouseEnter += new System.EventHandler(this.tableLayoutPanel1_MouseEnter);
+            // 
+            // chart3
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart3.ChartAreas.Add(chartArea1);
+            this.chart3.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.chart3.Legends.Add(legend1);
+            this.chart3.Location = new System.Drawing.Point(504, 280);
+            this.chart3.Name = "chart3";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart3.Series.Add(series1);
+            this.chart3.Size = new System.Drawing.Size(462, 305);
+            this.chart3.TabIndex = 8;
+            this.chart3.Text = "chart3";
             // 
             // panel1
             // 
@@ -726,19 +743,19 @@
             // toolStripMenuItem14
             // 
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(97, 22);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
             // 
             // toolStripMenuItem15
             // 
             this.toolStripMenuItem15.Name = "toolStripMenuItem15";
-            this.toolStripMenuItem15.Size = new System.Drawing.Size(97, 22);
+            this.toolStripMenuItem15.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem15.Click += new System.EventHandler(this.toolStripMenuItem15_Click);
             // 
             // toolStripMenuItem16
             // 
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
-            this.toolStripMenuItem16.Size = new System.Drawing.Size(97, 22);
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem16.Click += new System.EventHandler(this.toolStripMenuItem16_Click);
             // 
             // inneToolStripMenuItem
@@ -746,15 +763,15 @@
             this.inneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox5});
             this.inneToolStripMenuItem.Name = "inneToolStripMenuItem";
-            this.inneToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.inneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inneToolStripMenuItem.Text = "Inne";
+            this.inneToolStripMenuItem.MouseEnter += new System.EventHandler(this.inneToolStripMenuItem_MouseEnter);
             // 
             // toolStripTextBox5
             // 
             this.toolStripTextBox5.Name = "toolStripTextBox5";
             this.toolStripTextBox5.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.toolStripTextBox5_KeyPress);
-            this.toolStripTextBox5.MouseEnter += new System.EventHandler(this.toolStripTextBox5_MouseEnter);
             this.toolStripTextBox5.TextChanged += new System.EventHandler(this.toolStripTextBox5_TextChanged);
             // 
             // zakresCzęstotliwościToolStripMenuItem
@@ -771,8 +788,9 @@
             this.minToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox7});
             this.minToolStripMenuItem.Name = "minToolStripMenuItem";
-            this.minToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.minToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.minToolStripMenuItem.Text = "Min";
+            this.minToolStripMenuItem.MouseEnter += new System.EventHandler(this.minToolStripMenuItem_MouseEnter);
             // 
             // toolStripTextBox7
             // 
@@ -786,8 +804,9 @@
             this.maxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox8});
             this.maxToolStripMenuItem.Name = "maxToolStripMenuItem";
-            this.maxToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.maxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.maxToolStripMenuItem.Text = "Max";
+            this.maxToolStripMenuItem.MouseEnter += new System.EventHandler(this.maxToolStripMenuItem_MouseEnter);
             // 
             // toolStripTextBox8
             // 
@@ -1119,37 +1138,57 @@
             // 
             // chart1
             // 
-            chartArea13.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea13);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend13.Name = "Legend1";
-            this.chart1.Legends.Add(legend13);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(3, 280);
             this.chart1.Name = "chart1";
-            series13.ChartArea = "ChartArea1";
-            series13.Legend = "Legend1";
-            series13.Name = "Series1";
-            this.chart1.Series.Add(series13);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(495, 305);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
             // chart2
             // 
-            chartArea14.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea14);
+            chartArea3.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea3);
             this.chart2.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend14.Name = "Legend1";
-            this.chart2.Legends.Add(legend14);
+            legend3.Name = "Legend1";
+            this.chart2.Legends.Add(legend3);
             this.chart2.Location = new System.Drawing.Point(3, 3);
             this.chart2.Name = "chart2";
-            series14.ChartArea = "ChartArea1";
-            series14.Legend = "Legend1";
-            series14.Name = "Series1";
-            this.chart2.Series.Add(series14);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart2.Series.Add(series3);
             this.chart2.Size = new System.Drawing.Size(495, 271);
             this.chart2.TabIndex = 3;
             this.chart2.Text = "chart2";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.buttonPrintChart);
+            this.flowLayoutPanel1.Controls.Add(this.buttonStop);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 591);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(495, 24);
+            this.flowLayoutPanel1.TabIndex = 7;
+            // 
+            // buttonPrintChart
+            // 
+            this.buttonPrintChart.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonPrintChart.Location = new System.Drawing.Point(3, 3);
+            this.buttonPrintChart.Name = "buttonPrintChart";
+            this.buttonPrintChart.Size = new System.Drawing.Size(122, 21);
+            this.buttonPrintChart.TabIndex = 6;
+            this.buttonPrintChart.Text = "Generuj wykres";
+            this.buttonPrintChart.UseVisualStyleBackColor = true;
+            this.buttonPrintChart.Click += new System.EventHandler(this.buttonPrintChart_Click);
             // 
             // buttonStop
             // 
@@ -1162,16 +1201,14 @@
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
-            // buttonPrintChart
+            // pictureBox1
             // 
-            this.buttonPrintChart.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonPrintChart.Location = new System.Drawing.Point(3, 3);
-            this.buttonPrintChart.Name = "buttonPrintChart";
-            this.buttonPrintChart.Size = new System.Drawing.Size(122, 21);
-            this.buttonPrintChart.TabIndex = 6;
-            this.buttonPrintChart.Text = "Generuj wykres";
-            this.buttonPrintChart.UseVisualStyleBackColor = true;
-            this.buttonPrintChart.Click += new System.EventHandler(this.buttonPrintChart_Click);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(504, 591);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(462, 25);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // fileSystemWatcher1
             // 
@@ -1200,31 +1237,9 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // flowLayoutPanel1
+            // openFileDialog1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.buttonPrintChart);
-            this.flowLayoutPanel1.Controls.Add(this.buttonStop);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 591);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(495, 24);
-            this.flowLayoutPanel1.TabIndex = 7;
-            // 
-            // chart3
-            // 
-            chartArea12.Name = "ChartArea1";
-            this.chart3.ChartAreas.Add(chartArea12);
-            this.chart3.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend12.Name = "Legend1";
-            this.chart3.Legends.Add(legend12);
-            this.chart3.Location = new System.Drawing.Point(504, 280);
-            this.chart3.Name = "chart3";
-            series12.ChartArea = "ChartArea1";
-            series12.Legend = "Legend1";
-            series12.Name = "Series1";
-            this.chart3.Series.Add(series12);
-            this.chart3.Size = new System.Drawing.Size(462, 305);
-            this.chart3.TabIndex = 8;
-            this.chart3.Text = "chart3";
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -1246,6 +1261,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.contextMenuStripU2.ResumeLayout(false);
@@ -1256,9 +1272,9 @@
             this.contextMenuStripR1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1271,17 +1287,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem plikToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otwórzToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem edycjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem widokToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem ustawieniaStronyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ądWydrukuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drukujToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem zamknijToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cofnijToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ponówToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wyświetlPomocToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasekStanuToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
@@ -1381,6 +1393,11 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart3;
+        private System.Windows.Forms.ToolStripMenuItem szybkieDrukowanieToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem edycjaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cofnijToolStripMenuItem;
     }
 }
 

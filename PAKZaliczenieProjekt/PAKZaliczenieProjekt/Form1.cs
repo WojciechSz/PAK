@@ -876,23 +876,19 @@ namespace PAKZaliczenieProjekt
             toolStripTextBox4.Text = this.ValueC.ToString();
 
         }
-
-        private void toolStripTextBox5_MouseEnter(object sender, EventArgs e)
+        private void inneToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
             toolStripTextBox5.Text = this.ValueU1.ToString();
-
         }
 
-        private void toolStripTextBox7_MouseEnter(object sender, EventArgs e)
+        private void minToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
-            toolStripTextBox5.Text = this.ValueF1.ToString();
-
+            toolStripTextBox7.Text = this.ValueF1.ToString();
         }
 
-        private void toolStripTextBox8_MouseEnter(object sender, EventArgs e)
+        private void maxToolStripMenuItem_MouseEnter(object sender, EventArgs e)
         {
-            toolStripTextBox5.Text = this.ValueF2.ToString();
-
+            toolStripTextBox8.Text = this.ValueF2.ToString();
         }
 
         private void buttonPrintChart_Click(object sender, EventArgs e)
@@ -1190,11 +1186,6 @@ namespace PAKZaliczenieProjekt
             Close();
         }
 
-        private void ustawieniaStronyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            printDialog1.ShowDialog();
-        }
-
         private void ądWydrukuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             printPreviewDialog1.ShowDialog();
@@ -1202,7 +1193,45 @@ namespace PAKZaliczenieProjekt
 
         private void drukujToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            printDialog1.ShowDialog();
+        }
+
+        private void szybkieDrukowanieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             printDocument1.Print();
         }
+
+        private void otwórzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart1.BackImage = openFileDialog1.FileName;
+                chart2.BackImage = openFileDialog1.FileName;
+                chart3.BackImage = openFileDialog1.FileName;
+                chart1.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+        }
+
+        private void wyświetlPomocToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Temat: Filtr pasywny złożony z kombinacji dwóch rezystorów R1, R2, cewki magnetycznej L i kondensatora C."
+            + "\n Zakres:"
+            + "\n 1. Schemat ideowy;"
+            + "\n 2. Opisu elementów filtru;"
+            + "\n 3. Edycja wartości parametrów filtru: R1, R2, L i C;"
+            + "\n 4. Edycja wartości parametrów napięcia zasilającego U1 (przebieg sinusoidalny) oraz zakresu częstotliwości f;"
+            + "\n 5. Prezentacja graficzna transmitancji filtru U2/U1 w funkcji częstotliwości f dla stanu ustalonego przy zasilaniu sinusoidalnym;"
+            + "\n 6. Prezentacja graficzna prądu zasilającego I1 w funkcji częstotliwości."
+            + "\n 7. Prezentacja widma fazowego filtru U2/U1;"
+            + "\n 8. Inne elementy nadające aplikacji atrybuty dydaktyczne i poznawcze.", "RLC - Informacje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cofnijToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
     }
 }
