@@ -1228,7 +1228,25 @@ namespace PAKZaliczenieProjekt
 
         private void cofnijToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormParameters dlgParams = new FormParameters();
+            //Parametry dlgParams = new Parametry();
+            //// czy zamkniete OK?
+            //dlgParams.Amplituda = textBoxMagnitude.Text;
+            //dlgParams.Czestotliwosc = textBoxFrequency.Text;
+            //dlgParams.Czas = textBoxTime.Text;
+            if (dlgParams.ShowDialog() == DialogResult.OK)
+            {
+            //    //am = dlgParams.Am;
+            //    //fs = dlgParams.Fs;
+            //    //ts = dlgParams.Ts;
+            //    //textBoxMagnitude.Text = am.ToString();
+            //    //textBoxFrequency.Text = fs.ToString();
+            //    //textBoxTime.Text = ts.ToString();
+            //    textBoxMagnitude.Text = dlgParams.Amplituda;
+            //    textBoxFrequency.Text = dlgParams.Czestotliwosc;
+            //    textBoxTime.Text = dlgParams.Czas;
+            //    // textBoxMagnitude.Text = dlgParams.textBoxMagnitude.Text;
+            }
         }
 
 
