@@ -17,7 +17,7 @@ namespace PAKZaliczenieProjekt
 
         private bool schemeEnabled;
 
-        private int step = 1;
+        private const int step = 10;
 
         private const double default1ValueR1 = 10;
         private const double default1ValueR2 = 40;
@@ -39,6 +39,8 @@ namespace PAKZaliczenieProjekt
 
         private const double default1ValueF1 = 0;
         private const double default1ValueF2 = 1000;
+
+        private int size;
 
         private double valueR1;
         private double valueR2;
@@ -72,6 +74,7 @@ namespace PAKZaliczenieProjekt
         private Complex[] k;
 
         private Complex[] U2ByU1;
+
 
         public double ValueR1
         {
@@ -230,7 +233,6 @@ namespace PAKZaliczenieProjekt
             int percent1 = 0;
             int percent2 = 0;
             int counter;
-            int size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
             
             F = new double [size];
             F[0] = valueF1;
@@ -248,7 +250,6 @@ namespace PAKZaliczenieProjekt
             k = new Complex[size];
             U2ByU1 = new Complex[size];
 
-            //for (F = valueF1; F <= valueF2; F += 0.00001)
             for (counter = 0; counter < step * (valueF2 - valueF1); counter++)
             {
                 if (counter == 0)
@@ -257,7 +258,7 @@ namespace PAKZaliczenieProjekt
                 }
                 else
                 {
-                    F[counter] = F[counter - 1] + 1 / step;
+                    F[counter] = F[counter - 1] + (1.0 / step);
                 }
                 if (worker.CancellationPending)
                 {
@@ -325,6 +326,8 @@ namespace PAKZaliczenieProjekt
             this.ValueF1 = default1ValueF1;
             this.ValueF2 = default1ValueF2;
 
+            size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
+
             labelTextWithUnit(labelR1Value);
             labelTextWithUnit(labelR2Value);
             labelTextWithUnit(labelLValue);
@@ -355,6 +358,7 @@ namespace PAKZaliczenieProjekt
 
             toolStripStatusLabel1.Text = "Gotowy";
             toolStripStatusLabel3.Text = "     ";
+
         }
 
         void timer1_Tick(object sender, EventArgs e)
@@ -996,9 +1000,8 @@ namespace PAKZaliczenieProjekt
                     toolStripStatusLabel3.Text = "100%";
                     toolStripProgressBar1.Value = 100;
 
-                    ///// TO jakoś zmienić
-                    int size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
-                    // TU BEDZIE RYSOWANIE WYKRESOW
+                    //Rysowanie wykresów
+                    //Wykres 1
                     DataTable chart1DataTable;
                     DataView chart1DataView;
 
@@ -1046,7 +1049,8 @@ namespace PAKZaliczenieProjekt
                     chart1.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
                     chart1.ChartAreas[0].AxisX.Minimum = this.valueF1;
                     chart1.ChartAreas[0].AxisX.Maximum = this.valueF2;
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
+                    //Wykres 2
                     DataTable chart2DataTable;
                     DataView chart2DataView;
 
@@ -1093,7 +1097,7 @@ namespace PAKZaliczenieProjekt
                     chart2.ChartAreas[0].AxisX.Minimum = this.valueF1;
                     chart2.ChartAreas[0].AxisX.Maximum = this.valueF2;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //Wykres 3
                     DataTable chart3DataTable;
                     DataView chart3DataView;
 
@@ -1139,8 +1143,6 @@ namespace PAKZaliczenieProjekt
                     chart3.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
                     chart3.ChartAreas[0].AxisX.Minimum = this.valueF1;
                     chart3.ChartAreas[0].AxisX.Maximum = this.valueF2;
-
-                    //------------------------------------------------------------
                 }
             }
 
