@@ -37,7 +37,7 @@ namespace PAKZaliczenieProjekt
         private const double default3ValueC = 0.000012;
         private const double default3ValueU1 = 150;
 
-        private const double default1ValueF1 = 50;
+        private const double default1ValueF1 = 0;
         private const double default1ValueF2 = 1000;
 
         private double valueR1;
@@ -1112,27 +1112,27 @@ namespace PAKZaliczenieProjekt
 
                     for (int i = 0; i < size; i++)
                     {
-                        chart2Row = chart2DataTable.NewRow();
-                        chart2Row["Czestotliwosc"] = F[i];
-                        chart2Row["Amplituda"] = U2ByU1[i].Magnitude;
-                        chart2DataTable.Rows.Add(chart2Row);
+                        chart3Row = chart3DataTable.NewRow();
+                        chart3Row["Czestotliwosc"] = F[i];
+                        chart3Row["Amplituda"] = U2ByU1[i].Magnitude;
+                        chart3DataTable.Rows.Add(chart3Row);
                     }
-                    chart3DataView = new DataView(chart2DataTable);
+                    chart3DataView = new DataView(chart3DataTable);
                     chart3.Series.Clear();
                     chart3.Titles.Clear();
 
                     chart3.DataBindTable(chart3DataView, "Czestotliwosc");
                     chart3.Series["Amplituda"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-                    chart3.Series["Amplituda"].Color = Color.Red;
+                    chart3.Series["Amplituda"].Color = Color.Green;
                     chart3.ChartAreas[0].AxisX.LabelStyle.Format = "{#0.000}";
                     chart3.ChartAreas[0].BackColor = Color.Azure;
                     chart3.ChartAreas[0].AxisX.LineWidth = 1;
                     chart3.ChartAreas[0].AxisY.LineWidth = 1;
                     chart3.ChartAreas[0].AxisX.Title = "Czestotliwosc [Hz]";
-                    chart3.ChartAreas[0].AxisY.Title = "Amplituda []";
+                    chart3.ChartAreas[0].AxisY.Title = "Amplituda [dB]";
                     chart3.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
                     chart3.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Bold);
-                    chart3.Titles.Add("Widmo fazowe filtru U2/U1");
+                    chart3.Titles.Add("Transmitancja filtru U2/U1 w funkcji częstotliwości");
                     chart3.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, FontStyle.Bold);
                     chart3.Titles[0].ForeColor = Color.Gray;
                     chart3.Legends[0].DockedToChartArea = chart1.ChartAreas[0].Name;
@@ -1141,21 +1141,6 @@ namespace PAKZaliczenieProjekt
                     chart3.ChartAreas[0].AxisX.Maximum = this.valueF2;
 
                     //------------------------------------------------------------
-
-
-                    label12.Text = E[0].ToString();
-                    label13.Text = Omega[0].ToString();
-                    label14.Text = Z1[0].ToString();
-                    label15.Text = Z2[0].ToString();
-                    label16.Text = Z3[0].ToString();
-                    label17.Text = U1[0].ToString();
-                    label18.Text = U2[0].ToString();
-                    label19.Text = k[1].ToString();
-                    label20.Text = I1[1].ToString();
-                    label21.Text = I2[1].ToString();
-                    label22.Text = I3[1].ToString();
-
-                    label23.Text = I1[1].Magnitude.ToString();
                 }
             }
 
