@@ -13,6 +13,12 @@ namespace PAKZaliczenieProjekt
 {
     public partial class Form1 : Form
     {
+        Timer timer1;
+
+        private bool schemeEnabled;
+
+        private int step = 1;
+
         private const double default1ValueR1 = 10;
         private const double default1ValueR2 = 40;
         private const double default1ValueL = 0.007;
@@ -43,27 +49,27 @@ namespace PAKZaliczenieProjekt
         private double valueF1;
         private double valueF2;
         
-        private double F;
+        private double[] F;
         
         // pulsacja
-        private double Omega;
+        private double[] Omega;
 
         // wartości zespolone
         // źródło zasilania 
-        private Complex E;
+        private Complex[] E;
         // impedancje zespolone
-        private Complex Z1; 
-        private Complex Z2; 
-        private Complex Z3; 
+        private Complex[] Z1; 
+        private Complex[] Z2; 
+        private Complex[] Z3; 
         // napięcia zespolone
-        private Complex U1; 
-        private Complex U2;
+        private Complex[] U1; 
+        private Complex[] U2;
         // prady zespolone
-        private Complex I1;
-        private Complex I2;
-        private Complex I3;
+        private Complex[] I1;
+        private Complex[] I2;
+        private Complex[] I3;
         // wspolczynnik podobieństwa
-        private Complex k;
+        private Complex[] k;
 
         public double ValueR1
         {
@@ -144,7 +150,7 @@ namespace PAKZaliczenieProjekt
             }
             set
             {
-                valueF2 = value;
+                valueF1 = value;
             }
         }
 
@@ -215,50 +221,96 @@ namespace PAKZaliczenieProjekt
             label.Text = value.ToString() + unitType;
         }
 
-        public void Calculations()
+        public bool Calculations(BackgroundWorker worker, DoWorkEventArgs e)
         {
-            for (F = valueF1; F < valueF2; F++)
+            schemeEnabled = false;
+            toolStripStatusLabel1.Text = "Obliczenia";
+            int percent1 = 0;
+            int percent2 = 0;
+            int counter;
+            int size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
+            
+            F = new double [size];
+            F[0] = valueF1;
+
+            E = new Complex[size];
+            Omega = new double[size];
+            Z1 = new Complex[size];
+            Z2 = new Complex[size];
+            Z3 = new Complex[size];
+            I1 = new Complex[size];
+            I2 = new Complex[size];
+            I3 = new Complex[size];
+            U1 = new Complex[size];
+            U2 = new Complex[size];
+            k = new Complex[size];
+
+            //for (F = valueF1; F <= valueF2; F += 0.00001)
+            for (counter = 0; counter < step * (valueF2 - valueF1); counter++)
             {
-                E = new Complex((valueU1 / Math.Sqrt(2)), 0);
-                Omega = 2 * Math.PI * F;
-                Z1 = new Complex(0, Omega * valueL);
-                Z2 = new Complex(valueR1, 0);
-                Z3 = new Complex(valueR2, -(1 / Omega * valueC));
+                if (counter == 0)
+                {
+                    F[counter] = valueF1;
+                }
+                else
+                {
+                    F[counter] = F[counter - 1] + 1 / step;
+                }
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return false;
+                }
+                E[counter] = new Complex((valueU1 / Math.Sqrt(2)), 0);
+                Omega[counter] = 2 * Math.PI * F[counter];
+                Z1[counter] = new Complex(0, Omega[counter] * valueL);
+                Z2[counter] = new Complex(valueR1, 0);
+                Z3[counter] = new Complex(valueR2, -(1 / Omega[counter] * valueC));
 
-                I3 = new Complex(1, 0);
-                U2 = Complex.Multiply(I3, Z3);
-                I2 = Complex.Divide(U2, Z2);
+                I3[counter] = new Complex(1, 0);
+                U2[counter] = Complex.Multiply(I3[counter], Z3[counter]);
+                I2[counter] = Complex.Divide(U2[counter], Z2[counter]);
 
-                I1 = Complex.Add(I2, I3);
+                I1[counter] = Complex.Add(I2[counter], I3[counter]);
 
-                U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+                U1[counter] = Complex.Add(Complex.Multiply(Z1[counter], I1[counter]), U2[counter]);
 
-                k = Complex.Divide(E, U1);
+                k[counter] = Complex.Divide(E[counter], U1[counter]);
 
-                I1 = Complex.Multiply(k, I1);
-                I2 = Complex.Multiply(k, I2);
-                I3 = Complex.Multiply(k, I3);
+                I1[counter] = Complex.Multiply(k[counter], I1[counter]);
+                I2[counter] = Complex.Multiply(k[counter], I2[counter]);
+                I3[counter] = Complex.Multiply(k[counter], I3[counter]);
 
-                U2 = Complex.Multiply(I3, Z3);
-                U1 = Complex.Add(Complex.Multiply(Z1, I1), U2);
+                U2[counter] = Complex.Multiply(I3[counter], Z3[counter]);
+                U1[counter] = Complex.Add(Complex.Multiply(Z1[counter], I1[counter]), U2[counter]);
+
+                percent2 = (int)(100 * (F[counter] - valueF1) / (valueF2 - valueF1));
+                if (percent2 > percent1)
+                {
+                    worker.ReportProgress(percent2);
+                    percent1 = percent2;
+                }
             }
 
-            label12.Text = E.ToString();
-            label13.Text = Omega.ToString();
-            label14.Text = Z1.ToString();
-            label15.Text = Z2.ToString();
-            label16.Text = Z3.ToString();
-            label17.Text = U1.ToString();
-            label18.Text = U2.ToString();
-            label19.Text = k.ToString();
-            label20.Text = I1.ToString();
-            label21.Text = I2.ToString();
-            label22.Text = I3.ToString();
+            return true;
         }
+
+        //public bool draw()
+        //{
+
+        //}
 
         public Form1()
         {
             InitializeComponent();
+
+            schemeEnabled = true;
+            buttonStop.Enabled = false;
+
+            timer1 = new Timer();
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            timer1.Start();
 
             this.ValueR1 = default1ValueR1;
             this.ValueR2 = default1ValueR2;
@@ -296,47 +348,61 @@ namespace PAKZaliczenieProjekt
             this.toolStripMenuItem15.Text = default2ValueU1 + "" + unit.V;
             this.toolStripMenuItem16.Text = default3ValueU1 + "" + unit.V;
 
-            toolStripStatusLabel1.Text = "gotowy";
+            toolStripStatusLabel1.Text = "Gotowy";
+            toolStripStatusLabel3.Text = "     ";
+        }
+
+        void timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel2.Text = 
+                DateTime.Now.Hour.ToString("0#.") + ":" +
+                DateTime.Now.Minute.ToString("0#.") + ":" +
+                DateTime.Now.Second.ToString("0#.");
         }
 
         private void panel1_MouseEnter(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "schemat ideowy";
+            toolStripStatusLabel1.Text = "Schemat ideowy";
+        }
+
+        private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Gotowy";
         }
 
         private void tableLayoutPanel1_MouseEnter(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "gotowy";
+            toolStripStatusLabel1.Text = "Gotowy";
         }
 
         private void panelR1_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "rezystor R1 - " + this.ValueR1 + unit.Ω;
+            toolStripStatusLabel1.Text = "Rezystor R1 - " + this.ValueR1 + unit.Ω;
         }
 
         private void panelR2_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "rezystor R2 - " + this.ValueR2 + unit.Ω;
+            toolStripStatusLabel1.Text = "Rezystor R2 - " + this.ValueR2 + unit.Ω;
         }
 
         private void panelL_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "cewka L - " + this.ValueL + unit.H;
+            toolStripStatusLabel1.Text = "Cewka L - " + this.ValueL + unit.H;
         }
 
         private void panelC_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "kondensator C - " + this.ValueC + unit.F;
+            toolStripStatusLabel1.Text = "Kondensator C - " + this.ValueC + unit.F;
         }
 
         private void panelU1_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "napięcie U1 - " + this.ValueU1 + unit.V;
+            toolStripStatusLabel1.Text = "Napięcie zasilające U1 - " + this.ValueU1 + unit.V;
         }
 
         private void panelU2_MouseMove(object sender, MouseEventArgs e)
         {
-            toolStripStatusLabel1.Text = "napięcie U2 - " + this.ValueU2 + unit.V;
+            toolStripStatusLabel1.Text = "Napięcie U2 - " + this.ValueU2 + unit.V;
         }
 
         private void wyświetlajOznaczenieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -822,7 +888,10 @@ namespace PAKZaliczenieProjekt
 
         private void buttonPrintChart_Click(object sender, EventArgs e)
         {
-            Calculations();
+            toolStripProgressBar1.Value = 0;
+            backgroundWorker1.RunWorkerAsync();
+            buttonStop.Enabled = true;
+            buttonPrintChart.Enabled = false;
         }
 
         private void label13_Click(object sender, EventArgs e)
@@ -832,11 +901,19 @@ namespace PAKZaliczenieProjekt
 
         private void toolStripTextBox7_TextChanged(object sender, EventArgs e)
         {
+            double tempValueF1 = this.ValueF1;
             if (!double.TryParse(toolStripTextBox7.Text, out this.valueF1))
             {
                 MessageBox.Show("Błędna wartość częstotliwości", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            //else if (ValueF1 >= ValueF2)
+            //{
+            //    MessageBox.Show("Błędna wartość częstotliwości - Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    ValueF1 = tempValueF1;
+            //    //toolStripTextBox7.Text = tempValueF1.ToString();
+            //    return;
+            //}
             else
             {
                 labelTextWithUnit(labelFMin);
@@ -845,16 +922,247 @@ namespace PAKZaliczenieProjekt
 
         private void toolStripTextBox8_TextChanged(object sender, EventArgs e)
         {
+            double tempValueF2 = this.ValueF2;
             if (!double.TryParse(toolStripTextBox8.Text, out this.valueF2))
             {
                 MessageBox.Show("Błędna wartość częstotliwości", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            //else if(ValueF2 <= ValueF1)
+            //{
+            //    MessageBox.Show("Błędna wartość częstotliwości - Max <= Min", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    ValueF2 = tempValueF2;
+            //    toolStripTextBox8.Text = ValueF2.ToString();
+            //    return;
+            //}
             else
             {
                 labelTextWithUnit(labelFMax);
             }
         }
- 
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void toolStripTextBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                contextMenuStripU1.Close();
+            }
+        }
+
+        private void toolStripTextBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                contextMenuStripU1.Close();
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            toolStripProgressBar1.Value = e.ProgressPercentage;
+            toolStripStatusLabel3.Text = e.ProgressPercentage.ToString() + "%";
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)sender;
+            e.Result = Calculations(worker, e);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            else
+            {
+                if (e.Cancelled)
+                {
+                    MessageBox.Show("Przerwano obliczenia");
+                }
+                else
+                {
+                    toolStripStatusLabel3.Text = "100%";
+                    toolStripProgressBar1.Value = 100;
+
+                    // TU BEDZIE RYSOWANIE WYKRESOW
+
+                    //deklaracja tablicy klasy kolekcji
+                    DataTable dTable; //Tablica dla kontrolki Chart
+                    DataView dView; //Tablica widoku dla kontrolki Chart - ten obiekt przygotowuje dane do wykresu - sortuje/filtruje itp
+                    //inicjalizacja tablicy dTable - nie ma wymiarow
+                    dTable = new DataTable();
+                    DataColumn column; //deklaracja obiektu kolumny
+                    DataRow row; //deklaracja obiektu wiersza
+                    column = new DataColumn(); //inicjalizacja kolumny
+                    //zdefiniowanie typu danych w kolumnie
+                    column.DataType = Type.GetType("System.Double");
+                    //zdefiniowanie nzwy kolumny
+                    column.ColumnName = "Czestotliwosc";
+                    //zdefiniowanie kolumny do tablicy
+                    dTable.Columns.Add(column);
+
+                    column = new DataColumn();
+                    column.DataType = Type.GetType("System.Double");
+                    column.ColumnName = "Prad";
+                    dTable.Columns.Add(column);
+
+                    ///// TO jakoś zmienić
+                    int size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
+
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        row = dTable.NewRow();
+                        row["Czestotliwosc"] = F[i];
+                        row["Prad"] = I1[i].Magnitude;
+                        dTable.Rows.Add(row);
+                    }
+                    // inicjalizacja obiektu widoku z obiektem klasy kolekcji
+                    dView = new DataView(dTable);
+                    //usuniecie poprzednich serii na wykresie
+                    chart1.Series.Clear();
+                    chart1.Titles.Clear();
+                    //przeslanie danych do wykresu za pomoca obiektu klas widoku
+                    // 1 - obiekt klasy widoku, 2 - kolumna jako dane osi X
+                    chart1.DataBindTable(dView, "Czestotliwosc");
+                    chart1.Series["Prad"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{#0.000}";
+                    chart1.ChartAreas[0].BackColor = Color.Azure;
+                    chart1.ChartAreas[0].AxisX.LineWidth = 1;
+                    chart1.ChartAreas[0].AxisY.LineWidth = 1;
+                    chart1.ChartAreas[0].AxisX.Title = "Czestotliwosc [Hz]";
+                    chart1.ChartAreas[0].AxisY.Title = "Prąd I1 [A]";
+                    chart1.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 12F, FontStyle.Bold);
+                    chart1.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Italic);
+                    chart1.Titles.Add("Prąd zasilający I1 w funkcji częstotliwości");
+                    chart1.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, FontStyle.Bold);
+                    chart1.Titles[0].ForeColor = Color.Red;
+                    chart1.Legends[0].DockedToChartArea = chart1.ChartAreas[0].Name;
+                    chart1.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
+                    chart1.ChartAreas[0].AxisX.Minimum = this.valueF1;
+                    chart1.ChartAreas[0].AxisX.Maximum = this.valueF2;
+
+
+                    for (int i = 0; i < size; i++)
+                    {
+                        row = dTable.NewRow();
+                        row["Czestotliwosc"] = F[i];
+                        double faza1 = U1[i].Phase;
+                        double faza2 = U2[i].Phase;
+                        Complex dzieliny;
+                        dzieliny = U2[i].Magnitude/ U1[i].Magnitude;
+                        double tresc = dzieliny.Phase;
+                        row["Prad"] = (tresc);
+                        dTable.Rows.Add(row);
+                    }
+                    // inicjalizacja obiektu widoku z obiektem klasy kolekcji
+                    dView = new DataView(dTable);
+                    //usuniecie poprzednich serii na wykresie
+                    chart2.Series.Clear();
+                    chart2.Titles.Clear();
+                    //przeslanie danych do wykresu za pomoca obiektu klas widoku
+                    // 1 - obiekt klasy widoku, 2 - kolumna jako dane osi X
+                    chart2.DataBindTable(dView, "Czestotliwosc");
+                    chart2.Series["Prad"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                    chart2.ChartAreas[0].AxisX.LabelStyle.Format = "{#0.000}";
+                    chart2.ChartAreas[0].BackColor = Color.Azure;
+                    chart2.ChartAreas[0].AxisX.LineWidth = 1;
+                    chart2.ChartAreas[0].AxisY.LineWidth = 1;
+                    chart2.ChartAreas[0].AxisX.Title = "Czestotliwosc [Hz]";
+                    chart2.ChartAreas[0].AxisY.Title = "Trans. U2/U1";
+                    chart2.ChartAreas[0].AxisY.TitleFont = new System.Drawing.Font("Times New Roman", 12F, FontStyle.Bold);
+                    chart2.ChartAreas[0].AxisX.TitleFont = new System.Drawing.Font("Arial", 12F, FontStyle.Italic);
+                    chart2.Titles.Add("Transmitancji filtru U2/U1 w funkcji częstotliwości f dla stanuustalonego ");
+                    chart2.Titles[0].Font = new System.Drawing.Font("Times New Roman", 16F, FontStyle.Bold);
+                    chart2.Titles[0].ForeColor = Color.Red;
+                    chart2.Legends[0].DockedToChartArea = chart1.ChartAreas[0].Name;
+                    chart2.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
+                    chart2.ChartAreas[0].AxisX.Minimum = this.valueF1;
+                    chart2.ChartAreas[0].AxisX.Maximum = this.valueF2;
+
+                    //------------------------------------------------------------
+
+
+                    label12.Text = E[0].ToString();
+                    label13.Text = Omega[0].ToString();
+                    label14.Text = Z1[0].ToString();
+                    label15.Text = Z2[0].ToString();
+                    label16.Text = Z3[0].ToString();
+                    label17.Text = U1[0].ToString();
+                    label18.Text = U2[0].ToString();
+                    label19.Text = k[1].ToString();
+                    label20.Text = I1[1].ToString();
+                    label21.Text = I2[1].ToString();
+                    label22.Text = I3[1].ToString();
+
+                    label23.Text = I1[1].Magnitude.ToString();
+                }
+            }
+
+            toolStripStatusLabel1.Text = "Gotowy";
+
+            schemeEnabled = true;
+            buttonStop.Enabled = false;
+            buttonPrintChart.Enabled = true;
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+            buttonStop.Enabled = false;
+        }
+
+        private void contextMenuStripR1_Opening(object sender, CancelEventArgs e)
+        {
+            ustawieniaElementuToolStripMenuItem.Enabled = schemeEnabled;
+        }
+
+        private void contextMenuStripR2_Opening(object sender, CancelEventArgs e)
+        {
+            ustawRezzystancjeToolStripMenuItem.Enabled = schemeEnabled;
+        }
+
+        private void contextMenuStripL_Opening(object sender, CancelEventArgs e)
+        {
+            ustawToolStripMenuItem.Enabled = schemeEnabled;
+        }
+
+        private void contextMenuStripC_Opening(object sender, CancelEventArgs e)
+        {
+            ustawPojemnośćCToolStripMenuItem.Enabled = schemeEnabled;
+        }
+
+        private void contextMenuStripU1_Opening(object sender, CancelEventArgs e)
+        {
+            napięcieU1ToolStripMenuItem.Enabled = schemeEnabled;
+            zakresCzęstotliwościToolStripMenuItem.Enabled = schemeEnabled;
+        }
+
+        private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ustawieniaStronyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printDialog1.ShowDialog();
+        }
+
+        private void ądWydrukuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void drukujToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printDocument1.Print();
+        }
     }
 }

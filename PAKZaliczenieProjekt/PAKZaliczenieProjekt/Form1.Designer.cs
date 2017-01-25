@@ -30,13 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,7 +141,7 @@
             this.labelU1 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
             this.buttonPrintChart = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -168,6 +171,10 @@
             this.label23 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -189,6 +196,9 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabel3,
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 643);
             this.statusStrip1.Name = "statusStrip1";
@@ -196,6 +206,23 @@
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
             // 
             // toolStripStatusLabel1
             // 
@@ -247,12 +274,14 @@
             this.ustawieniaStronyToolStripMenuItem.Name = "ustawieniaStronyToolStripMenuItem";
             this.ustawieniaStronyToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.ustawieniaStronyToolStripMenuItem.Text = "Ustawienia strony...";
+            this.ustawieniaStronyToolStripMenuItem.Click += new System.EventHandler(this.ustawieniaStronyToolStripMenuItem_Click);
             // 
             // ądWydrukuToolStripMenuItem
             // 
             this.ądWydrukuToolStripMenuItem.Name = "ądWydrukuToolStripMenuItem";
             this.ądWydrukuToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.ądWydrukuToolStripMenuItem.Text = "Podgląd wydruku...";
+            this.ądWydrukuToolStripMenuItem.Click += new System.EventHandler(this.ądWydrukuToolStripMenuItem_Click);
             // 
             // drukujToolStripMenuItem
             // 
@@ -260,6 +289,7 @@
             this.drukujToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.drukujToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.drukujToolStripMenuItem.Text = "&Drukuj...";
+            this.drukujToolStripMenuItem.Click += new System.EventHandler(this.drukujToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -271,6 +301,7 @@
             this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
             this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.zamknijToolStripMenuItem.Text = "Zamknij";
+            this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
             // 
             // edycjaToolStripMenuItem
             // 
@@ -357,7 +388,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.chart1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.chart2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.buttonStop, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.buttonPrintChart, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -401,6 +432,7 @@
             this.panel1.Size = new System.Drawing.Size(462, 273);
             this.panel1.TabIndex = 1;
             this.panel1.MouseEnter += new System.EventHandler(this.panel1_MouseEnter);
+            this.panel1.MouseLeave += new System.EventHandler(this.panel1_MouseLeave);
             // 
             // labelMax
             // 
@@ -606,6 +638,7 @@
             this.wyświetlajIndukcyjnośćToolStripMenuItem});
             this.contextMenuStripL.Name = "contextMenuStripL";
             this.contextMenuStripL.Size = new System.Drawing.Size(204, 76);
+            this.contextMenuStripL.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripL_Opening);
             // 
             // ustawToolStripMenuItem
             // 
@@ -621,19 +654,19 @@
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(97, 22);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(97, 22);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(97, 22);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem13.Click += new System.EventHandler(this.toolStripMenuItem13_Click);
             // 
             // innaToolStripMenuItem2
@@ -641,7 +674,7 @@
             this.innaToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox3});
             this.innaToolStripMenuItem2.Name = "innaToolStripMenuItem2";
-            this.innaToolStripMenuItem2.Size = new System.Drawing.Size(97, 22);
+            this.innaToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.innaToolStripMenuItem2.Text = "Inna";
             this.innaToolStripMenuItem2.MouseEnter += new System.EventHandler(this.innaToolStripMenuItem2_MouseEnter);
             // 
@@ -700,6 +733,7 @@
             this.wyświetlajNapięcieToolStripMenuItem});
             this.contextMenuStripU1.Name = "contextMenuStripU1";
             this.contextMenuStripU1.Size = new System.Drawing.Size(257, 98);
+            this.contextMenuStripU1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripU1_Opening);
             // 
             // napięcieU1ToolStripMenuItem
             // 
@@ -767,6 +801,7 @@
             // 
             this.toolStripTextBox7.Name = "toolStripTextBox7";
             this.toolStripTextBox7.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.toolStripTextBox7_KeyPress);
             this.toolStripTextBox7.TextChanged += new System.EventHandler(this.toolStripTextBox7_TextChanged);
             // 
             // maxToolStripMenuItem
@@ -781,6 +816,7 @@
             // 
             this.toolStripTextBox8.Name = "toolStripTextBox8";
             this.toolStripTextBox8.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.toolStripTextBox8_KeyPress);
             this.toolStripTextBox8.TextChanged += new System.EventHandler(this.toolStripTextBox8_TextChanged);
             // 
             // toolStripSeparator7
@@ -830,6 +866,7 @@
             this.wyświetlajRezystancjeToolStripMenuItem1});
             this.contextMenuStripR2.Name = "contextMenuStripR2";
             this.contextMenuStripR2.Size = new System.Drawing.Size(192, 76);
+            this.contextMenuStripR2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripR2_Opening);
             // 
             // ustawRezzystancjeToolStripMenuItem
             // 
@@ -923,6 +960,7 @@
             this.wyświetlajPojemnośćToolStripMenuItem});
             this.contextMenuStripC.Name = "contextMenuStripC";
             this.contextMenuStripC.Size = new System.Drawing.Size(193, 76);
+            this.contextMenuStripC.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripC_Opening);
             // 
             // ustawPojemnośćCToolStripMenuItem
             // 
@@ -1018,6 +1056,7 @@
             this.contextMenuStripR1.Name = "contextMenuStripR1";
             this.contextMenuStripR1.Size = new System.Drawing.Size(192, 76);
             this.contextMenuStripR1.Tag = "";
+            this.contextMenuStripR1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripR1_Opening);
             // 
             // ustawieniaElementuToolStripMenuItem
             // 
@@ -1103,47 +1142,48 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea9.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea9);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend9.Name = "Legend1";
+            this.chart1.Legends.Add(legend9);
             this.chart1.Location = new System.Drawing.Point(3, 282);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series9.ChartArea = "ChartArea1";
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.chart1.Series.Add(series9);
             this.chart1.Size = new System.Drawing.Size(495, 307);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             // 
             // chart2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
+            chartArea10.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea10);
             this.chart2.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
+            legend10.Name = "Legend1";
+            this.chart2.Legends.Add(legend10);
             this.chart2.Location = new System.Drawing.Point(3, 3);
             this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
+            series10.ChartArea = "ChartArea1";
+            series10.Legend = "Legend1";
+            series10.Name = "Series1";
+            this.chart2.Series.Add(series10);
             this.chart2.Size = new System.Drawing.Size(495, 273);
             this.chart2.TabIndex = 3;
             this.chart2.Text = "chart2";
             // 
-            // button1
+            // buttonStop
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(504, 595);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 21);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonStop.Dock = System.Windows.Forms.DockStyle.Left;
+            this.buttonStop.Location = new System.Drawing.Point(504, 595);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(75, 21);
+            this.buttonStop.TabIndex = 5;
+            this.buttonStop.Text = "Przerwij";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // buttonPrintChart
             // 
@@ -1439,6 +1479,28 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1452,6 +1514,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Filtr pasywny";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -1575,7 +1638,7 @@
         private System.Windows.Forms.ToolStripMenuItem wyświetlajWartościParametrówToolStripMenuItem;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonPrintChart;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
@@ -1612,6 +1675,13 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox8;
         private System.Windows.Forms.Label labelMax;
         private System.Windows.Forms.Label labelMin;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }
 
