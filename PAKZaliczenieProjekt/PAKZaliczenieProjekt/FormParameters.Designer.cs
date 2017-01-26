@@ -37,17 +37,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBoxU1 = new System.Windows.Forms.TextBox();
+            this.textBoxF1 = new System.Windows.Forms.TextBox();
+            this.textBoxF2 = new System.Windows.Forms.TextBox();
+            this.textBoxR1 = new System.Windows.Forms.TextBox();
+            this.textBoxR2 = new System.Windows.Forms.TextBox();
+            this.textBoxL = new System.Windows.Forms.TextBox();
+            this.textBoxC = new System.Windows.Forms.TextBox();
             this.buttonConfirm = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -170,15 +170,26 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "Pojemność C";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 290);
+            this.label8.Margin = new System.Windows.Forms.Padding(10);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(192, 52);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Wskazówka: Parametry filtru można ustawiać również klikając prawym przyciskiem my" +
+    "szy wybrany element na schemacie filtru.";
+            // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.textBox1);
-            this.flowLayoutPanel2.Controls.Add(this.textBox2);
-            this.flowLayoutPanel2.Controls.Add(this.textBox3);
-            this.flowLayoutPanel2.Controls.Add(this.textBox4);
-            this.flowLayoutPanel2.Controls.Add(this.textBox5);
-            this.flowLayoutPanel2.Controls.Add(this.textBox6);
-            this.flowLayoutPanel2.Controls.Add(this.textBox7);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxU1);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxF1);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxF2);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxR1);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxR2);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxL);
+            this.flowLayoutPanel2.Controls.Add(this.textBoxC);
             this.flowLayoutPanel2.Controls.Add(this.buttonConfirm);
             this.flowLayoutPanel2.Controls.Add(this.buttonCancel);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
@@ -188,64 +199,65 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(154, 363);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
-            // textBox1
+            // textBoxU1
             // 
-            this.textBox1.Location = new System.Drawing.Point(10, 10);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.textBoxU1.Location = new System.Drawing.Point(10, 10);
+            this.textBoxU1.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxU1.Name = "textBoxU1";
+            this.textBoxU1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxU1.TabIndex = 0;
             // 
-            // textBox2
+            // textBoxF1
             // 
-            this.textBox2.Location = new System.Drawing.Point(10, 50);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.textBoxF1.Location = new System.Drawing.Point(10, 50);
+            this.textBoxF1.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxF1.Name = "textBoxF1";
+            this.textBoxF1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxF1.TabIndex = 1;
             // 
-            // textBox3
+            // textBoxF2
             // 
-            this.textBox3.Location = new System.Drawing.Point(10, 90);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 2;
+            this.textBoxF2.Location = new System.Drawing.Point(10, 90);
+            this.textBoxF2.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxF2.Name = "textBoxF2";
+            this.textBoxF2.Size = new System.Drawing.Size(100, 20);
+            this.textBoxF2.TabIndex = 2;
             // 
-            // textBox4
+            // textBoxR1
             // 
-            this.textBox4.Location = new System.Drawing.Point(10, 130);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 3;
+            this.textBoxR1.Location = new System.Drawing.Point(10, 130);
+            this.textBoxR1.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxR1.Name = "textBoxR1";
+            this.textBoxR1.Size = new System.Drawing.Size(100, 20);
+            this.textBoxR1.TabIndex = 3;
             // 
-            // textBox5
+            // textBoxR2
             // 
-            this.textBox5.Location = new System.Drawing.Point(10, 170);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 4;
+            this.textBoxR2.Location = new System.Drawing.Point(10, 170);
+            this.textBoxR2.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxR2.Name = "textBoxR2";
+            this.textBoxR2.Size = new System.Drawing.Size(100, 20);
+            this.textBoxR2.TabIndex = 4;
             // 
-            // textBox6
+            // textBoxL
             // 
-            this.textBox6.Location = new System.Drawing.Point(10, 210);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 5;
+            this.textBoxL.Location = new System.Drawing.Point(10, 210);
+            this.textBoxL.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxL.Name = "textBoxL";
+            this.textBoxL.Size = new System.Drawing.Size(100, 20);
+            this.textBoxL.TabIndex = 5;
             // 
-            // textBox7
+            // textBoxC
             // 
-            this.textBox7.Location = new System.Drawing.Point(10, 250);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 6;
+            this.textBoxC.Location = new System.Drawing.Point(10, 250);
+            this.textBoxC.Margin = new System.Windows.Forms.Padding(10);
+            this.textBoxC.Name = "textBoxC";
+            this.textBoxC.Size = new System.Drawing.Size(100, 20);
+            this.textBoxC.TabIndex = 6;
             // 
             // buttonConfirm
             // 
+            this.buttonConfirm.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonConfirm.Location = new System.Drawing.Point(10, 290);
             this.buttonConfirm.Margin = new System.Windows.Forms.Padding(10);
             this.buttonConfirm.Name = "buttonConfirm";
@@ -264,17 +276,6 @@
             this.buttonCancel.Text = "Anuluj";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 290);
-            this.label8.Margin = new System.Windows.Forms.Padding(10);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(192, 52);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Wskazówka: Parametry filtru można ustawiać również klikając prawym przyciskiem my" +
-    "szy wybrany element na schemacie filtru.";
             // 
             // FormParameters
             // 
@@ -307,13 +308,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBoxU1;
+        private System.Windows.Forms.TextBox textBoxF1;
+        private System.Windows.Forms.TextBox textBoxF2;
+        private System.Windows.Forms.TextBox textBoxR1;
+        private System.Windows.Forms.TextBox textBoxR2;
+        private System.Windows.Forms.TextBox textBoxL;
+        private System.Windows.Forms.TextBox textBoxC;
         private System.Windows.Forms.Button buttonConfirm;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label8;

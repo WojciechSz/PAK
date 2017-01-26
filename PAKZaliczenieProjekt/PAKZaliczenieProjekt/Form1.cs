@@ -17,7 +17,7 @@ namespace PAKZaliczenieProjekt
 
         private bool schemeEnabled;
 
-        private const int step = 10;
+        private const int step = 1;
 
         private const double default1ValueR1 = 10;
         private const double default1ValueR2 = 40;
@@ -85,6 +85,54 @@ namespace PAKZaliczenieProjekt
             set
             {
                 valueR1 = value;
+            }
+        }
+
+        public string ValueR1String
+        {
+            get
+            {
+                return this.valueR1.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość rezystancji R1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if(temp <= 0)
+                {
+                    MessageBox.Show("R1 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueR1 = temp;
+                }
+            }
+        }
+
+        public string ValueR2String
+        {
+            get
+            {
+                return this.valueR2.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość rezystancji R2", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("R2 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueR2 = temp;
+                }
             }
         }
 
@@ -228,12 +276,15 @@ namespace PAKZaliczenieProjekt
 
         public bool Calculations(BackgroundWorker worker, DoWorkEventArgs e)
         {
+            size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
             schemeEnabled = false;
-            toolStripStatusLabel1.Text = "Obliczenia";
             int percent1 = 0;
             int percent2 = 0;
             int counter;
-            
+
+
+            double incr = 1.0/step;
+
             F = new double [size];
             F[0] = valueF1;
 
@@ -250,15 +301,24 @@ namespace PAKZaliczenieProjekt
             k = new Complex[size];
             U2ByU1 = new Complex[size];
 
+
+
+            int c = 0;
+
             for (counter = 0; counter < step * (valueF2 - valueF1); counter++)
             {
+                //for (int i = 0; i < 10000000; i++)
+                //{
+                //    c += 1;
+                //}
+
                 if (counter == 0)
                 {
                     F[counter] = valueF1;
                 }
                 else
                 {
-                    F[counter] = F[counter - 1] + (1.0 / step);
+                    F[counter] = F[counter - 1] + incr;
                 }
                 if (worker.CancellationPending)
                 {
@@ -301,11 +361,6 @@ namespace PAKZaliczenieProjekt
             return true;
         }
 
-        //public bool draw()
-        //{
-
-        //}
-
         public Form1()
         {
             InitializeComponent();
@@ -325,8 +380,6 @@ namespace PAKZaliczenieProjekt
             this.ValueU1 = default1ValueU1;
             this.ValueF1 = default1ValueF1;
             this.ValueF2 = default1ValueF2;
-
-            size = step * (Convert.ToInt32(valueF2) - Convert.ToInt32(valueF1));
 
             labelTextWithUnit(labelR1Value);
             labelTextWithUnit(labelR2Value);
@@ -375,11 +428,6 @@ namespace PAKZaliczenieProjekt
         }
 
         private void panel1_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Gotowy";
-        }
-
-        private void tableLayoutPanel1_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Gotowy";
         }
@@ -607,32 +655,6 @@ namespace PAKZaliczenieProjekt
             wyświetlajNapięcieToolStripMenuItem_Click(sender, e);
         }
 
-        private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            if(!double.TryParse(toolStripTextBox1.Text, out this.valueR1))
-            {
-                MessageBox.Show("Błędna wartość rezystancji", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else 
-            {
-                labelTextWithUnit(labelR1Value);
-            }
-        }
-
-        private void toolStripTextBox2_TextChanged(object sender, EventArgs e)
-        {
-            if (!double.TryParse(toolStripTextBox2.Text, out this.valueR2))
-            {
-                MessageBox.Show("Błędna wartość rezystancji", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                labelTextWithUnit(labelR2Value);
-            }
-        }
-
         private void toolStripTextBox3_TextChanged(object sender, EventArgs e)
         {
             if (!double.TryParse(toolStripTextBox3.Text, out this.valueL))
@@ -676,6 +698,8 @@ namespace PAKZaliczenieProjekt
         {
             if(e.KeyChar == '\r')
             {
+                ValueR1String = toolStripTextBox1.Text;
+                labelTextWithUnit(labelR1Value);
                 contextMenuStripR1.Close();
             }
         }
@@ -684,6 +708,8 @@ namespace PAKZaliczenieProjekt
         {
             if (e.KeyChar == '\r')
             {
+                ValueR2String = toolStripTextBox2.Text;
+                labelTextWithUnit(labelR2Value);
                 contextMenuStripR2.Close();
             }
         }
@@ -971,6 +997,7 @@ namespace PAKZaliczenieProjekt
         {
             toolStripProgressBar1.Value = e.ProgressPercentage;
             toolStripStatusLabel3.Text = e.ProgressPercentage.ToString() + "%";
+            toolStripStatusLabel1.Text = "Obliczenia";
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -1234,6 +1261,13 @@ namespace PAKZaliczenieProjekt
             //dlgParams.Amplituda = textBoxMagnitude.Text;
             //dlgParams.Czestotliwosc = textBoxFrequency.Text;
             //dlgParams.Czas = textBoxTime.Text;
+            dlgParams.ValueR1 = this.ValueR1;
+            dlgParams.ValueR2 = this.ValueR2;
+            dlgParams.ValueL = this.ValueL;
+            dlgParams.ValueC = this.ValueC;
+            dlgParams.ValueU1 = this.ValueU1;
+            dlgParams.ValueF1 = this.ValueF1;
+            dlgParams.ValueF2 = this.ValueF2;
             if (dlgParams.ShowDialog() == DialogResult.OK)
             {
             //    //am = dlgParams.Am;
@@ -1245,6 +1279,20 @@ namespace PAKZaliczenieProjekt
             //    textBoxMagnitude.Text = dlgParams.Amplituda;
             //    textBoxFrequency.Text = dlgParams.Czestotliwosc;
             //    textBoxTime.Text = dlgParams.Czas;
+                this.ValueR1 = dlgParams.ValueR1;
+                this.ValueR2 = dlgParams.ValueR2;
+                this.ValueL = dlgParams.ValueL;
+                this.ValueC = dlgParams.ValueC;
+                this.ValueU1 = dlgParams.ValueU1;
+                this.ValueF1 = dlgParams.ValueF1;
+                this.ValueF2 = dlgParams.ValueF2;
+                labelTextWithUnit(labelR1Value);
+                labelTextWithUnit(labelR2Value);
+                labelTextWithUnit(labelLValue);
+                labelTextWithUnit(labelCValue);
+                labelTextWithUnit(labelU1Value);
+                labelTextWithUnit(labelFMin);
+                labelTextWithUnit(labelFMax);
             //    // textBoxMagnitude.Text = dlgParams.textBoxMagnitude.Text;
             }
         }
