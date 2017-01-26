@@ -30,6 +30,11 @@ namespace PAKZaliczenieProjekt
                     MessageBox.Show("Błędna wartość rezystancji R1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueR1;
                 }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("Rezystancja R1 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueR1;
+                }
                 else
                 {
                     this.valueR1 = temp;
@@ -51,6 +56,11 @@ namespace PAKZaliczenieProjekt
                 if (!double.TryParse(textBoxR2.Text, out temp))
                 {
                     MessageBox.Show("Błędna wartość rezystancji R2", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueR2;
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("Rezystancja R2 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueR2;
                 }
                 else
@@ -76,6 +86,11 @@ namespace PAKZaliczenieProjekt
                     MessageBox.Show("Błędna wartość indukcyjności L", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueL;
                 }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("Indukcyjność L <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueL;
+                }
                 else
                 {
                     this.valueL = temp;
@@ -99,6 +114,11 @@ namespace PAKZaliczenieProjekt
                     MessageBox.Show("Błędna wartość pojemności C", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueC;
                 }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("Pojemność C <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueC;
+                }
                 else
                 {
                     this.valueC = temp;
@@ -120,6 +140,11 @@ namespace PAKZaliczenieProjekt
                 if (!double.TryParse(textBoxU1.Text, out temp))
                 {
                     MessageBox.Show("Błędna wartość napięcia U1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueU1;
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("Napięcie U1 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueU1;
                 }
                 else
@@ -147,7 +172,12 @@ namespace PAKZaliczenieProjekt
                 }
                 else if(temp >= this.valueF2)
                 {
-                    MessageBox.Show("Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Częstotliwość Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueF1;
+                }
+                else if (temp < 0)
+                {
+                    MessageBox.Show("Częstotliwość Min < 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueF1;
                 }
                 else
@@ -175,8 +205,13 @@ namespace PAKZaliczenieProjekt
                 }
                 else if (temp <= this.valueF1)
                 {
-                    MessageBox.Show("Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Częstotliwość Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return this.valueF2;
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("Częstotliwość Max <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return this.valueF1;
                 }
                 else
                 {

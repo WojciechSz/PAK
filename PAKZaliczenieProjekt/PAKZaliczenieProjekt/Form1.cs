@@ -15,8 +15,6 @@ namespace PAKZaliczenieProjekt
     {
         Timer timer1;
 
-        private bool schemeEnabled;
-
         private const int step = 1;
 
         private const double default1ValueR1 = 10;
@@ -39,6 +37,9 @@ namespace PAKZaliczenieProjekt
 
         private const double default1ValueF1 = 0;
         private const double default1ValueF2 = 1000;
+
+        private bool schemeEnabled;
+        private bool chartsPrinted;
 
         private int size;
 
@@ -85,54 +86,6 @@ namespace PAKZaliczenieProjekt
             set
             {
                 valueR1 = value;
-            }
-        }
-
-        public string ValueR1String
-        {
-            get
-            {
-                return this.valueR1.ToString();
-            }
-            set
-            {
-                double temp;
-                if (!double.TryParse(value, out temp))
-                {
-                    MessageBox.Show("Błędna wartość rezystancji R1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if(temp <= 0)
-                {
-                    MessageBox.Show("R1 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    valueR1 = temp;
-                }
-            }
-        }
-
-        public string ValueR2String
-        {
-            get
-            {
-                return this.valueR2.ToString();
-            }
-            set
-            {
-                double temp;
-                if (!double.TryParse(value, out temp))
-                {
-                    MessageBox.Show("Błędna wartość rezystancji R2", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (temp <= 0)
-                {
-                    MessageBox.Show("R2 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    valueR2 = temp;
-                }
             }
         }
 
@@ -219,6 +172,182 @@ namespace PAKZaliczenieProjekt
             }
         }
 
+        public string ValueR1String
+        {
+            get
+            {
+                return this.valueR1.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość rezystancji R1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("R1 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueR1 = temp;
+                }
+            }
+        }
+
+        public string ValueR2String
+        {
+            get
+            {
+                return this.valueR2.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość rezystancji R2", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("R2 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueR2 = temp;
+                }
+            }
+        }
+
+        public string ValueLString
+        {
+            get
+            {
+                return this.valueL.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość indukcyjności L", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("L <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueL = temp;
+                }
+            }
+        }
+
+        public string ValueCString
+        {
+            get
+            {
+                return this.valueC.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość pojemności C", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("C <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueC = temp;
+                }
+            }
+        }
+
+        public string ValueU1String
+        {
+            get
+            {
+                return this.valueU1.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość napięcia U1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("U1 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueU1 = temp;
+                }
+            }
+        }
+
+        public string ValueF1String
+        {
+            get
+            {
+                return this.valueF1.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość Min częstotliwości F1", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp >= this.valueF2)
+                {
+                    MessageBox.Show("Częstotliwość Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp < 0)
+                {
+                    MessageBox.Show("F1 < 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueF1 = temp;
+                }
+            }
+        }
+
+        public string ValueF2String
+        {
+            get
+            {
+                return this.valueF2.ToString();
+            }
+            set
+            {
+                double temp;
+                if (!double.TryParse(value, out temp))
+                {
+                    MessageBox.Show("Błędna wartość Max częstotliwości F2", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= this.valueF1)
+                {
+                    MessageBox.Show("Częstotliwość Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (temp <= 0)
+                {
+                    MessageBox.Show("F2 <= 0", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    valueF2 = temp;
+                }
+            }
+        }
+
         enum unit
         {
             Ω,
@@ -301,12 +430,12 @@ namespace PAKZaliczenieProjekt
             k = new Complex[size];
             U2ByU1 = new Complex[size];
 
-
-
-            int c = 0;
+            //używane w testach wątku roboczego
+            //int c = 0;
 
             for (counter = 0; counter < step * (valueF2 - valueF1); counter++)
             {
+                //używane w testach wątku roboczego
                 //for (int i = 0; i < 10000000; i++)
                 //{
                 //    c += 1;
@@ -367,6 +496,7 @@ namespace PAKZaliczenieProjekt
 
             schemeEnabled = true;
             buttonStop.Enabled = false;
+            chartsPrinted = false;
 
             timer1 = new Timer();
             timer1.Interval = 1000;
@@ -428,6 +558,48 @@ namespace PAKZaliczenieProjekt
         }
 
         private void panel1_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Gotowy";
+        }
+
+        private void chart1_MouseEnter(object sender, EventArgs e)
+        {
+            if (chartsPrinted)
+            {
+                toolStripStatusLabel1.Text = "Wykres  - " + chart1.Titles[0].Text;
+                this.toolTip1.SetToolTip(this.chart1, "Wykres  - " + chart1.Titles[0].Text);
+            }
+        }
+
+        private void chart1_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Gotowy";
+        }
+
+        private void chart2_MouseEnter(object sender, EventArgs e)
+        {
+            if (chartsPrinted)
+            {
+                toolStripStatusLabel1.Text = "Wykres  - " + chart2.Titles[0].Text;
+                this.toolTip1.SetToolTip(this.chart2, "Wykres  - " + chart2.Titles[0].Text);
+            }
+        }
+
+        private void chart2_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Gotowy";
+        }
+
+        private void chart3_MouseEnter(object sender, EventArgs e)
+        {
+            if (chartsPrinted)
+            {
+                toolStripStatusLabel1.Text = "Wykres  - " + chart3.Titles[0].Text;
+                this.toolTip1.SetToolTip(this.chart3, "Wykres  - " + chart3.Titles[0].Text);
+            }
+        }
+
+        private void chart3_MouseLeave(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Gotowy";
         }
@@ -655,45 +827,6 @@ namespace PAKZaliczenieProjekt
             wyświetlajNapięcieToolStripMenuItem_Click(sender, e);
         }
 
-        private void toolStripTextBox3_TextChanged(object sender, EventArgs e)
-        {
-            if (!double.TryParse(toolStripTextBox3.Text, out this.valueL))
-            {
-                MessageBox.Show("Błędna wartość indukcyjności", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                labelTextWithUnit(labelLValue);
-            }
-        }
-
-        private void toolStripTextBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (!double.TryParse(toolStripTextBox4.Text, out this.valueC))
-            {
-                MessageBox.Show("Błędna wartość pojemności", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                labelTextWithUnit(labelCValue);
-            }
-        }
-
-        private void toolStripTextBox5_TextChanged(object sender, EventArgs e)
-        {
-            if (!double.TryParse(toolStripTextBox5.Text, out this.valueU1))
-            {
-                MessageBox.Show("Błędna wartość napięcia", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                labelTextWithUnit(labelU1Value);
-            }
-        }
-
         private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == '\r')
@@ -718,6 +851,8 @@ namespace PAKZaliczenieProjekt
         {
             if (e.KeyChar == '\r')
             {
+                ValueLString = toolStripTextBox3.Text;
+                labelTextWithUnit(labelLValue);
                 contextMenuStripL.Close();
             }
         }
@@ -726,6 +861,8 @@ namespace PAKZaliczenieProjekt
         {
             if (e.KeyChar == '\r')
             {
+                ValueCString = toolStripTextBox4.Text;
+                labelTextWithUnit(labelCValue);
                 contextMenuStripC.Close();
             }
         }
@@ -734,15 +871,29 @@ namespace PAKZaliczenieProjekt
         {
             if (e.KeyChar == '\r')
             {
+                ValueU1String = toolStripTextBox5.Text;
+                labelTextWithUnit(labelU1Value);
                 contextMenuStripU1.Close();
             }
         }
 
-        private void toolStripTextBox6_KeyPress(object sender, KeyPressEventArgs e)
+        private void toolStripTextBox7_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\r')
             {
-                contextMenuStripU2.Close();
+                ValueF1String = toolStripTextBox7.Text;
+                labelTextWithUnit(labelFMin);
+                contextMenuStripU1.Close();
+            }
+        }
+
+        private void toolStripTextBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                ValueF2String = toolStripTextBox8.Text;
+                labelTextWithUnit(labelFMax);
+                contextMenuStripU1.Close();
             }
         }
 
@@ -925,72 +1076,9 @@ namespace PAKZaliczenieProjekt
             buttonPrintChart.Enabled = false;
         }
 
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripTextBox7_TextChanged(object sender, EventArgs e)
-        {
-            double tempValueF1 = this.ValueF1;
-            if (!double.TryParse(toolStripTextBox7.Text, out this.valueF1))
-            {
-                MessageBox.Show("Błędna wartość częstotliwości", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            //else if (ValueF1 >= ValueF2)
-            //{
-            //    MessageBox.Show("Błędna wartość częstotliwości - Min >= Max", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    ValueF1 = tempValueF1;
-            //    //toolStripTextBox7.Text = tempValueF1.ToString();
-            //    return;
-            //}
-            else
-            {
-                labelTextWithUnit(labelFMin);
-            }
-        }
-
-        private void toolStripTextBox8_TextChanged(object sender, EventArgs e)
-        {
-            double tempValueF2 = this.ValueF2;
-            if (!double.TryParse(toolStripTextBox8.Text, out this.valueF2))
-            {
-                MessageBox.Show("Błędna wartość częstotliwości", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            //else if(ValueF2 <= ValueF1)
-            //{
-            //    MessageBox.Show("Błędna wartość częstotliwości - Max <= Min", "Parametry", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    ValueF2 = tempValueF2;
-            //    toolStripTextBox8.Text = ValueF2.ToString();
-            //    return;
-            //}
-            else
-            {
-                labelTextWithUnit(labelFMax);
-            }
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer1.Stop();
-        }
-
-        private void toolStripTextBox7_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\r')
-            {
-                contextMenuStripU1.Close();
-            }
-        }
-
-        private void toolStripTextBox8_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\r')
-            {
-                contextMenuStripU1.Close();
-            }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1166,6 +1254,8 @@ namespace PAKZaliczenieProjekt
                     chart3.Legends[0].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;
                     chart3.ChartAreas[0].AxisX.Minimum = this.valueF1;
                     chart3.ChartAreas[0].AxisX.Maximum = this.valueF2;
+
+                    chartsPrinted = true;
                 }
             }
 
@@ -1256,11 +1346,7 @@ namespace PAKZaliczenieProjekt
         private void cofnijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormParameters dlgParams = new FormParameters();
-            //Parametry dlgParams = new Parametry();
-            //// czy zamkniete OK?
-            //dlgParams.Amplituda = textBoxMagnitude.Text;
-            //dlgParams.Czestotliwosc = textBoxFrequency.Text;
-            //dlgParams.Czas = textBoxTime.Text;
+
             dlgParams.ValueR1 = this.ValueR1;
             dlgParams.ValueR2 = this.ValueR2;
             dlgParams.ValueL = this.ValueL;
@@ -1268,17 +1354,9 @@ namespace PAKZaliczenieProjekt
             dlgParams.ValueU1 = this.ValueU1;
             dlgParams.ValueF1 = this.ValueF1;
             dlgParams.ValueF2 = this.ValueF2;
+
             if (dlgParams.ShowDialog() == DialogResult.OK)
             {
-            //    //am = dlgParams.Am;
-            //    //fs = dlgParams.Fs;
-            //    //ts = dlgParams.Ts;
-            //    //textBoxMagnitude.Text = am.ToString();
-            //    //textBoxFrequency.Text = fs.ToString();
-            //    //textBoxTime.Text = ts.ToString();
-            //    textBoxMagnitude.Text = dlgParams.Amplituda;
-            //    textBoxFrequency.Text = dlgParams.Czestotliwosc;
-            //    textBoxTime.Text = dlgParams.Czas;
                 this.ValueR1 = dlgParams.ValueR1;
                 this.ValueR2 = dlgParams.ValueR2;
                 this.ValueL = dlgParams.ValueL;
@@ -1293,11 +1371,60 @@ namespace PAKZaliczenieProjekt
                 labelTextWithUnit(labelU1Value);
                 labelTextWithUnit(labelFMin);
                 labelTextWithUnit(labelFMax);
-            //    // textBoxMagnitude.Text = dlgParams.textBoxMagnitude.Text;
+            }
+        }
+
+        private void edycjaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cofnijToolStripMenuItem.Enabled = schemeEnabled;
+        }
+
+        private void contextMenuStripChart1_Opening(object sender, CancelEventArgs e)
+        {
+            contextMenuStripChart1.Enabled = chartsPrinted;
+        }
+
+        private void czcionkaTytułuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart1.Titles[0].Font = fontDialog1.Font;
             }
         }
 
 
+        private void czcionkaPodpisówToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart1.ChartAreas[0].AxisY.TitleFont = fontDialog1.Font;
+                chart1.ChartAreas[0].AxisX.TitleFont = fontDialog1.Font;
+            }
+        }
+
+        private void kolorSeriiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart1.Series["Prad"].Color = colorDialog1.Color;
+            }
+        }
+
+        private void kolorTłaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart1.ChartAreas[0].BackColor = colorDialog1.Color;
+            }
+        }
+
+        private void kolorTytułuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart1.Titles[0].ForeColor = colorDialog1.Color;
+            }
+        }
 
     }
 }
