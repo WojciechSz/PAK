@@ -411,7 +411,6 @@ namespace PAKZaliczenieProjekt
             int percent2 = 0;
             int counter;
 
-
             double incr = 1.0/step;
 
             F = new double [size];
@@ -542,6 +541,7 @@ namespace PAKZaliczenieProjekt
             toolStripStatusLabel1.Text = "Gotowy";
             toolStripStatusLabel3.Text = "     ";
 
+            buttonDeletePicutre.Visible = false;
         }
 
         void timer1_Tick(object sender, EventArgs e)
@@ -1326,7 +1326,19 @@ namespace PAKZaliczenieProjekt
                 chart2.BackImage = openFileDialog1.FileName;
                 chart3.BackImage = openFileDialog1.FileName;
                 chart1.BackgroundImageLayout = ImageLayout.Stretch;
+                chart2.BackgroundImageLayout = ImageLayout.Stretch;
+                chart3.BackgroundImageLayout = ImageLayout.Stretch;
+
+                buttonDeletePicutre.Visible = true;
             }
+        }
+
+        private void buttonDeletePicutre_Click(object sender, EventArgs e)
+        {
+            chart1.BackImage = "";
+            chart2.BackImage = "";
+            chart3.BackImage = "";
+            buttonDeletePicutre.Visible = false;
         }
 
         private void wyświetlPomocToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1392,7 +1404,6 @@ namespace PAKZaliczenieProjekt
             }
         }
 
-
         private void czcionkaPodpisówToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (fontDialog1.ShowDialog() == DialogResult.OK)
@@ -1426,5 +1437,96 @@ namespace PAKZaliczenieProjekt
             }
         }
 
+        private void contextMenuStripChart2_Opening(object sender, CancelEventArgs e)
+        {
+            contextMenuStripChart2.Enabled = chartsPrinted;
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart2.Titles[0].Font = fontDialog1.Font;
+            }
+        }
+
+        private void toolStripMenuItem17_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart2.ChartAreas[0].AxisY.TitleFont = fontDialog1.Font;
+                chart2.ChartAreas[0].AxisX.TitleFont = fontDialog1.Font;
+            }
+        }
+
+        private void toolStripMenuItem18_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart2.Series["Faza"].Color = colorDialog1.Color;
+            }
+        }
+
+        private void toolStripMenuItem19_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart2.ChartAreas[0].BackColor = colorDialog1.Color;
+            }
+        }
+
+        private void toolStripMenuItem20_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart2.Titles[0].ForeColor = colorDialog1.Color;
+            }
+        }
+
+        private void contextMenuStripChart3_Opening(object sender, CancelEventArgs e)
+        {
+            contextMenuStripChart3.Enabled = chartsPrinted;
+        }
+
+        private void toolStripMenuItem21_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart3.Titles[0].Font = fontDialog1.Font;
+            }
+        }
+
+        private void toolStripMenuItem22_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart3.ChartAreas[0].AxisY.TitleFont = fontDialog1.Font;
+                chart3.ChartAreas[0].AxisX.TitleFont = fontDialog1.Font;
+            }
+        }
+
+        private void toolStripMenuItem23_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart3.Series["Amplituda"].Color = colorDialog1.Color;
+            }
+        }
+
+        private void toolStripMenuItem24_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart3.ChartAreas[0].BackColor = colorDialog1.Color;
+            }
+        }
+
+        private void toolStripMenuItem25_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                chart3.Titles[0].ForeColor = colorDialog1.Color;
+            }
+        }
     }
 }
